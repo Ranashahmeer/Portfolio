@@ -2,7 +2,16 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        spring: {
+          green: "#A1CB35",
+          greenDark: "#769826",
+          yellow: "#FFDE4E",
+          orange: "#FF9D4D",
+        },
+      },
+    },
   },
   plugins: [],
 };

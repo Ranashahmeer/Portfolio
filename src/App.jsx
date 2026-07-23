@@ -304,32 +304,32 @@ const CERTS = [
 function getTheme(dark) {
   return dark
     ? {
-        page: "bg-slate-950",
-        nav: "bg-slate-950/80 border-slate-800",
-        surface: "bg-slate-900",
-        surfaceAlt: "bg-slate-900/60",
-        border: "border-slate-800",
+        page: "bg-[#0B130E]",
+        nav: "bg-[#0B130E]/80 border-[#1B2B1F]",
+        surface: "bg-[#111C15]",
+        surfaceAlt: "bg-[#111C15]/60",
+        border: "border-[#1B2B1F]",
         text: "text-slate-100",
         muted: "text-slate-400",
-        mutedSoft: "text-slate-500",
-        pill: "bg-slate-800 text-slate-300 border-slate-700",
-        pillActive: "bg-teal-400 text-slate-950 border-teal-400",
-        accentText: "text-teal-400",
-        placeholderBg: "from-slate-800 to-teal-950",
+        mutedSoft: "text-[#618055]",
+        pill: "bg-[#111C15] text-[#A1CB35] border-[#1B2B1F]",
+        pillActive: "bg-spring-green text-[#0B130E] border-spring-green",
+        accentText: "text-spring-green",
+        placeholderBg: "from-[#111C15] to-[#1D2F1B]",
       }
     : {
-        page: "bg-white",
-        nav: "bg-white/80 border-slate-200",
-        surface: "bg-slate-50",
-        surfaceAlt: "bg-slate-50/60",
-        border: "border-slate-200",
-        text: "text-slate-900",
+        page: "bg-[#FAFBF6]",
+        nav: "bg-[#FAFBF6]/80 border-[#E1EBC2]",
+        surface: "bg-white",
+        surfaceAlt: "bg-[#FAFBF6]/60",
+        border: "border-[#E1EBC2]",
+        text: "text-[#132213]",
         muted: "text-slate-600",
-        mutedSoft: "text-slate-500",
-        pill: "bg-slate-100 text-slate-700 border-slate-200",
-        pillActive: "bg-teal-500 text-white border-teal-500",
-        accentText: "text-teal-600",
-        placeholderBg: "from-slate-100 to-teal-50",
+        mutedSoft: "text-[#769826]",
+        pill: "bg-white text-[#769826] border-[#E1EBC2]",
+        pillActive: "bg-spring-greenDark text-white border-spring-greenDark",
+        accentText: "text-spring-greenDark",
+        placeholderBg: "from-[#FAFBF6] to-[#E2F0B9]",
       };
 }
 
@@ -352,7 +352,7 @@ function Eyebrow({ t, index, label }) {
   return (
     <div className="flex items-center gap-3 mb-3">
       <span className={`font-mono2 text-xs tracking-widest ${t.accentText}`}>{index}</span>
-      <span className={`h-px w-8 bg-gradient-to-r from-teal-400 to-transparent`} />
+      <span className={`h-px w-8 bg-gradient-to-r from-current to-transparent ${t.accentText}`} />
       <span className={`font-mono2 text-xs tracking-[0.2em] uppercase ${t.mutedSoft}`}>{label}</span>
     </div>
   );
@@ -383,8 +383,8 @@ function Reveal({ children, delay = 0, className = "" }) {
 /* ------------------------------------------------------------------ */
 
 function PipelineBackdrop({ dark }) {
-  const stroke = dark ? "#1e2a3f" : "#dbe4ee";
-  const flow = dark ? "#2dd4bf" : "#0d9488";
+  const stroke = dark ? "#1B2B1F" : "#E1EBC2";
+  const flow = dark ? "#A1CB35" : "#769826";
   const paths = [
     "M -50 80 C 200 80, 250 200, 500 200 S 800 320, 1050 320",
     "M -50 220 C 150 220, 300 60, 550 60 S 850 180, 1050 180",
@@ -443,7 +443,7 @@ function Nav({ t, dark, setDark }) {
     <div className={`fixed top-0 inset-x-0 z-50 backdrop-blur border-b ${t.nav}`}>
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#top" className={`font-display font-extrabold text-lg ${t.text}`}>
-          RSA<span className="text-teal-400">.</span>
+          RSA<span className={t.accentText}>.</span>
         </a>
         <div className="hidden md:flex items-center gap-7">
           {NAV_LINKS.map((l) => (
@@ -547,7 +547,7 @@ function Hero({ t, dark }) {
           <div className="h-10 sm:h-12 mt-4 flex items-center">
             <span className={`font-mono2 text-lg sm:text-2xl ${t.muted}`}>
               {typed}
-              <span className="inline-block w-[2px] h-5 sm:h-6 bg-teal-400 ml-1 align-middle animate-pulse" />
+              <span className="inline-block w-[2px] h-5 sm:h-6 bg-spring-greenDark dark:bg-spring-green ml-1 align-middle animate-pulse" />
             </span>
           </div>
           <p className={`font-body text-base sm:text-lg ${t.muted} mt-6 max-w-xl`}>
@@ -557,13 +557,13 @@ function Hero({ t, dark }) {
           <div className="flex flex-wrap gap-4 mt-9">
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber-400 text-slate-950 font-body font-semibold text-sm hover:bg-amber-300 hover:-translate-y-0.5 transition-all shadow-lg shadow-amber-400/10"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-spring-yellow to-spring-orange text-slate-950 font-body font-semibold text-sm hover:-translate-y-0.5 transition-all shadow-lg shadow-spring-orange/20"
             >
               Hire on Upwork <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#projects"
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border ${t.border} ${t.text} font-body font-semibold text-sm hover:border-teal-400 hover:text-teal-400 hover:-translate-y-0.5 transition-all`}
+              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border ${t.border} ${t.text} font-body font-semibold text-sm hover:border-spring-greenDark hover:text-spring-greenDark dark:hover:border-spring-green dark:hover:text-spring-green hover:-translate-y-0.5 transition-all`}
             >
               View Projects
             </a>
@@ -579,7 +579,7 @@ function Hero({ t, dark }) {
           <img
             src="/profile.jpg"
             alt="Rana Shahmeer Ali"
-            className="w-40 h-40 sm:w-56 sm:h-56 mx-auto rounded-full object-cover border border-teal-400/20 shadow-2xl"
+            className="w-40 h-40 sm:w-56 sm:h-56 mx-auto rounded-full object-cover border border-spring-greenDark/20 dark:border-spring-green/20 shadow-2xl"
           />
         </Reveal>
       </div>
@@ -646,7 +646,7 @@ function Skills({ t }) {
           {SKILL_GROUPS.map((group, i) => (
             <Reveal key={group.label} delay={(i % 2) * 0.05}>
               <div className="relative pl-6">
-                <div className="absolute left-0 top-1 bottom-1 w-px bg-gradient-to-b from-teal-400/70 to-transparent" />
+                <div className="absolute left-0 top-1 bottom-1 w-px bg-gradient-to-b from-spring-greenDark/70 dark:from-spring-green/70 to-transparent" />
                 <div className="flex items-baseline gap-2 mb-3">
                   <span className={`font-mono2 text-xs ${t.accentText}`}>{group.stage}</span>
                   <h3 className={`font-display font-bold text-sm tracking-wide uppercase ${t.text}`}>
@@ -657,7 +657,7 @@ function Skills({ t }) {
                   {group.items.map((skill) => (
                     <span
                       key={skill}
-                      className={`font-mono2 text-xs px-3 py-1.5 rounded-full border ${t.pill} hover:border-teal-400 hover:text-teal-400 transition-colors`}
+                      className={`font-mono2 text-xs px-3 py-1.5 rounded-full border ${t.pill} hover:border-spring-greenDark hover:text-spring-greenDark dark:hover:border-spring-green dark:hover:text-spring-green transition-colors`}
                     >
                       {skill}
                     </span>
@@ -692,7 +692,7 @@ function ExperienceTimeline({ t }) {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 1.4, ease: "easeOut" }}
             style={{ transformOrigin: "top" }}
-            className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-teal-400 via-teal-400/40 to-transparent"
+            className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-spring-greenDark via-spring-greenDark/40 to-transparent dark:from-spring-green dark:via-spring-green/40"
           />
           <div className="flex flex-col gap-12">
             {EXPERIENCE.map((job, i) => {
@@ -700,9 +700,9 @@ function ExperienceTimeline({ t }) {
               return (
                 <Reveal key={job.role + job.dates} delay={i * 0.1} className="relative pl-14">
                   <div
-                    className={`absolute left-0 top-0 w-10 h-10 rounded-full flex items-center justify-center border-2 border-teal-400 ${t.page}`}
+                    className={`absolute left-0 top-0 w-10 h-10 rounded-full flex items-center justify-center border-2 border-spring-greenDark dark:border-spring-green ${t.page}`}
                   >
-                    <Icon className="w-4 h-4 text-teal-400" strokeWidth={1.75} />
+                    <Icon className="w-4 h-4 text-spring-greenDark dark:text-spring-green" strokeWidth={1.75} />
                   </div>
                   <div className={`p-6 rounded-2xl border ${t.border} ${t.surface}`}>
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
@@ -713,7 +713,7 @@ function ExperienceTimeline({ t }) {
                     <ul className="flex flex-col gap-2">
                       {job.bullets.map((b) => (
                         <li key={b} className={`flex gap-2 font-body text-sm ${t.muted}`}>
-                          <ChevronRight className="w-4 h-4 shrink-0 mt-0.5 text-teal-400" />
+                          <ChevronRight className={`w-4 h-4 shrink-0 mt-0.5 ${t.accentText}`} />
                           <span>{b}</span>
                         </li>
                       ))}
@@ -741,7 +741,7 @@ function ProjectCard({ t, project, large }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -16 }}
       transition={{ duration: 0.35 }}
-      className={`group rounded-2xl border ${t.border} ${t.surface} overflow-hidden hover:border-teal-400/60 hover:-translate-y-1 transition-all ${
+      className={`group rounded-2xl border ${t.border} ${t.surface} overflow-hidden hover:border-spring-greenDark/60 dark:hover:border-spring-green/60 hover:-translate-y-1 transition-all ${
         large ? "sm:col-span-2" : ""
       }`}
     >
@@ -757,7 +757,7 @@ function ProjectCard({ t, project, large }) {
             </span>
           ))}
           {project.flagship && (
-            <span className="font-mono2 text-[10px] tracking-wide uppercase px-2 py-1 rounded-full bg-amber-400 text-slate-950 border border-amber-400">
+            <span className="font-mono2 text-[10px] tracking-wide uppercase px-2 py-1 rounded-full bg-spring-yellow text-slate-950 border border-spring-yellow">
               Flagship
             </span>
           )}
@@ -839,7 +839,7 @@ function Freelance({ t }) {
             lending startups, and AI-first companies.
           </p>
           <div className="flex flex-wrap gap-3">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-400 text-slate-950 font-body font-semibold text-sm">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-spring-yellow text-slate-950 font-body font-semibold text-sm">
               <Award className="w-4 h-4" /> Top Rated
             </span>
             <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border ${t.border} ${t.text} font-body font-semibold text-sm`}>
@@ -852,7 +852,7 @@ function Freelance({ t }) {
             <ul className="flex flex-col gap-4">
               {items.map((item) => (
                 <li key={item} className="flex gap-3">
-                  <div className="w-2 h-2 rounded-full bg-teal-400 mt-2 shrink-0" />
+                  <div className="w-2 h-2 rounded-full bg-spring-greenDark dark:bg-spring-green mt-2 shrink-0" />
                   <span className={`font-body text-sm ${t.muted}`}>{item}</span>
                 </li>
               ))}
@@ -861,7 +861,7 @@ function Freelance({ t }) {
               href="https://www.upwork.com/"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-full bg-amber-400 text-slate-950 font-body font-semibold text-sm hover:bg-amber-300 transition-colors"
+              className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-full bg-gradient-to-r from-spring-yellow to-spring-orange text-slate-950 font-body font-semibold text-sm hover:brightness-110 transition-all shadow-lg shadow-spring-orange/20"
             >
               Hire Me on Upwork <ExternalLink className="w-4 h-4" />
             </a>
@@ -887,7 +887,7 @@ function Education({ t }) {
         <div className="grid sm:grid-cols-3 gap-6">
           <Reveal>
             <div className={`p-6 rounded-2xl border ${t.border} ${t.surface} h-full`}>
-              <GraduationCap className="w-6 h-6 text-teal-400 mb-4" strokeWidth={1.5} />
+              <GraduationCap className={`w-6 h-6 ${t.accentText} mb-4`} strokeWidth={1.5} />
               <h3 className={`font-display font-bold ${t.text} mb-1`}>
                 BS Computer Science
               </h3>
@@ -899,7 +899,7 @@ function Education({ t }) {
           {CERTS.map((c, i) => (
             <Reveal key={c.name} delay={0.05 + i * 0.05}>
               <div className={`p-6 rounded-2xl border ${t.border} ${t.surface} h-full`}>
-                <Award className="w-6 h-6 text-teal-400 mb-4" strokeWidth={1.5} />
+                <Award className={`w-6 h-6 ${t.accentText} mb-4`} strokeWidth={1.5} />
                 <h3 className={`font-display font-bold ${t.text} mb-1`}>{c.name}</h3>
                 <p className={`font-body text-sm ${t.mutedSoft}`}>{c.org}</p>
               </div>
@@ -936,7 +936,7 @@ function Contact({ t }) {
           <div className="flex flex-wrap justify-center gap-4">
             <a
               href="mailto:ranashahmeerali@gmail.com"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber-400 text-slate-950 font-body font-semibold text-sm hover:bg-amber-300 hover:-translate-y-0.5 transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-spring-yellow to-spring-orange text-slate-950 font-body font-semibold text-sm hover:-translate-y-0.5 transition-all shadow-lg shadow-spring-orange/20"
             >
               <Mail className="w-4 h-4" /> Email Me
             </a>
@@ -944,7 +944,7 @@ function Contact({ t }) {
               href="https://linkedin.com/in/rana-shahmeer-ali-479592263"
               target="_blank"
               rel="noreferrer"
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border ${t.border} ${t.text} font-body font-semibold text-sm hover:border-teal-400 hover:text-teal-400 hover:-translate-y-0.5 transition-all`}
+              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border ${t.border} ${t.text} font-body font-semibold text-sm hover:border-spring-greenDark hover:text-spring-greenDark dark:hover:border-spring-green dark:hover:text-spring-green hover:-translate-y-0.5 transition-all`}
             >
               <Linkedin className="w-4 h-4" /> LinkedIn
             </a>
@@ -952,7 +952,7 @@ function Contact({ t }) {
               href="https://github.com/Ranashahmeer"
               target="_blank"
               rel="noreferrer"
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border ${t.border} ${t.text} font-body font-semibold text-sm hover:border-teal-400 hover:text-teal-400 hover:-translate-y-0.5 transition-all`}
+              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border ${t.border} ${t.text} font-body font-semibold text-sm hover:border-spring-greenDark hover:text-spring-greenDark dark:hover:border-spring-green dark:hover:text-spring-green hover:-translate-y-0.5 transition-all`}
             >
               <Github className="w-4 h-4" /> GitHub
             </a>
@@ -1003,7 +1003,7 @@ function Footer({ t }) {
 /* ------------------------------------------------------------------ */
 
 export default function App() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   const t = getTheme(dark);
 
   return (
