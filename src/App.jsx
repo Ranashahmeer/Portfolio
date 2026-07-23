@@ -576,11 +576,10 @@ function Hero({ t, dark }) {
           </div>
         </div>
         <Reveal delay={0.2}>
-          <ImagePlaceholder
-            t={t}
-            className="w-40 h-40 sm:w-56 sm:h-56 mx-auto rounded-full"
-            rounded="rounded-full"
-            label="Profile photo"
+          <img
+            src="/profile.jpg"
+            alt="Rana Shahmeer Ali"
+            className="w-40 h-40 sm:w-56 sm:h-56 mx-auto rounded-full object-cover border border-teal-400/20 shadow-2xl"
           />
         </Reveal>
       </div>
