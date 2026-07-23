@@ -304,32 +304,32 @@ const CERTS = [
 function getTheme(dark) {
   return dark
     ? {
-        page: "bg-[#0B130E]",
-        nav: "bg-[#0B130E]/80 border-[#1B2B1F]",
-        surface: "bg-[#111C15]",
-        surfaceAlt: "bg-[#111C15]/60",
-        border: "border-[#1B2B1F]",
+        page: "bg-[#030712]",
+        nav: "bg-[#030712]/80 border-zinc-900",
+        surface: "bg-zinc-900/40 border border-zinc-800/80 backdrop-blur-md shadow-2xl",
+        surfaceAlt: "bg-zinc-950/40",
+        border: "border-zinc-800/80",
         text: "text-slate-100",
         muted: "text-slate-400",
-        mutedSoft: "text-[#618055]",
-        pill: "bg-[#111C15] text-[#A1CB35] border-[#1B2B1F]",
-        pillActive: "bg-spring-green text-[#0B130E] border-spring-green",
-        accentText: "text-spring-green",
-        placeholderBg: "from-[#111C15] to-[#1D2F1B]",
+        mutedSoft: "text-slate-500",
+        pill: "bg-zinc-900/50 text-slate-300 border-zinc-800/80",
+        pillActive: "bg-emerald-500 text-zinc-950 border-emerald-500 shadow-md shadow-emerald-500/20 font-semibold",
+        accentText: "text-emerald-400",
+        placeholderBg: "from-zinc-900 to-emerald-950/20",
       }
     : {
-        page: "bg-[#FAFBF6]",
-        nav: "bg-[#FAFBF6]/80 border-[#E1EBC2]",
-        surface: "bg-white",
-        surfaceAlt: "bg-[#FAFBF6]/60",
-        border: "border-[#E1EBC2]",
-        text: "text-[#132213]",
+        page: "bg-[#f8fafc]",
+        nav: "bg-white/80 border-slate-200/80",
+        surface: "bg-white/70 border border-slate-200/60 backdrop-blur-md shadow-xl shadow-slate-100/40",
+        surfaceAlt: "bg-slate-100/50",
+        border: "border-slate-200/60",
+        text: "text-slate-900",
         muted: "text-slate-600",
-        mutedSoft: "text-[#769826]",
-        pill: "bg-white text-[#769826] border-[#E1EBC2]",
-        pillActive: "bg-spring-greenDark text-white border-spring-greenDark",
-        accentText: "text-spring-greenDark",
-        placeholderBg: "from-[#FAFBF6] to-[#E2F0B9]",
+        mutedSoft: "text-slate-400",
+        pill: "bg-slate-100/80 text-slate-700 border-slate-200/60",
+        pillActive: "bg-indigo-600 text-white border-indigo-600 shadow-md shadow-indigo-600/10 font-semibold",
+        accentText: "text-indigo-600",
+        placeholderBg: "from-slate-50 to-indigo-50",
       };
 }
 
@@ -440,19 +440,20 @@ const NAV_LINKS = [
 function Nav({ t, dark, setDark }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className={`fixed top-0 inset-x-0 z-50 backdrop-blur border-b ${t.nav}`}>
+    <div className={`fixed top-0 inset-x-0 z-50 backdrop-blur-md border-b ${t.nav} transition-all duration-300`}>
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#top" className={`font-display font-extrabold text-lg ${t.text}`}>
-          RSA<span className={t.accentText}>.</span>
+        <a href="#top" className={`font-display font-extrabold text-lg ${t.text} tracking-tight hover:opacity-85 transition-opacity`}>
+          RSA<span className={dark ? "text-emerald-400" : "text-indigo-600"}>.</span>
         </a>
         <div className="hidden md:flex items-center gap-7">
           {NAV_LINKS.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className={`font-body text-sm ${t.muted} hover:${t.accentText} transition-colors`}
+              className={`font-body text-sm ${t.muted} hover:${dark ? 'text-emerald-400' : 'text-indigo-600'} transition-colors relative group py-2`}
             >
               {l.label}
+              <span className={`absolute bottom-0 left-0 w-0 h-0.5 ${dark ? 'bg-emerald-400' : 'bg-indigo-600'} transition-all duration-300 group-hover:w-full`} />
             </a>
           ))}
         </div>
@@ -460,12 +461,12 @@ function Nav({ t, dark, setDark }) {
           <button
             aria-label="Toggle theme"
             onClick={() => setDark(!dark)}
-            className={`p-2 rounded-full border ${t.border} ${t.muted} hover:${t.accentText} transition-colors`}
+            className={`p-2 rounded-full border ${t.border} ${t.muted} transition-all duration-300 hover:rotate-[15deg] ${dark ? 'hover:text-emerald-400 hover:border-emerald-400/30' : 'hover:text-indigo-600 hover:border-indigo-600/30'}`}
           >
             {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
           <button
-            className={`md:hidden p-2 rounded-full border ${t.border} ${t.muted}`}
+            className={`md:hidden p-2 rounded-full border ${t.border} ${t.muted} transition-colors`}
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
@@ -532,55 +533,70 @@ function useTypingEffect(words, typeSpeed = 55, pause = 1400) {
 function Hero({ t, dark }) {
   const typed = useTypingEffect(ROLES);
   return (
-    <section id="top" className="relative pt-32 pb-24 sm:pt-40 sm:pb-32 overflow-hidden">
+    <section id="top" className="relative pt-32 pb-24 sm:pt-40 sm:pb-36 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <PipelineBackdrop dark={dark} />
       </div>
-      <div className="relative max-w-6xl mx-auto px-6 grid md:grid-cols-[1.3fr_0.7fr] gap-12 items-center">
-        <div>
-          <p className={`font-mono2 text-xs tracking-[0.25em] uppercase ${t.accentText} mb-4`}>
+      <div className="relative max-w-6xl mx-auto px-6 grid md:grid-cols-[1.25fr_0.75fr] gap-12 items-center">
+        <div className="z-10">
+          <p className={`font-mono2 text-xs tracking-[0.25em] uppercase ${t.accentText} mb-4 font-semibold`}>
             Karachi, Pakistan &middot; Open to relocation (Saudi Arabia)
           </p>
           <h1 className={`font-display font-extrabold text-4xl sm:text-6xl leading-tight ${t.text}`}>
             Rana Shahmeer Ali
           </h1>
           <div className="h-10 sm:h-12 mt-4 flex items-center">
-            <span className={`font-mono2 text-lg sm:text-2xl ${t.muted}`}>
+            <span className={`font-mono2 text-lg sm:text-2xl font-bold bg-gradient-to-r ${dark ? 'from-emerald-400 to-cyan-400' : 'from-indigo-600 to-violet-600'} bg-clip-text text-transparent`}>
               {typed}
-              <span className="inline-block w-[2px] h-5 sm:h-6 bg-spring-greenDark dark:bg-spring-green ml-1 align-middle animate-pulse" />
+              <span className={`inline-block w-[2.5px] h-5 sm:h-6 ${dark ? 'bg-emerald-400' : 'bg-indigo-600'} ml-1 align-middle animate-pulse`} />
             </span>
           </div>
-          <p className={`font-body text-base sm:text-lg ${t.muted} mt-6 max-w-xl`}>
+          <p className={`font-body text-base sm:text-lg ${t.muted} mt-6 max-w-xl leading-relaxed`}>
             I turn manual, multi-day data processes into automated pipelines that run in
             minutes — for fintech platforms and Upwork clients alike.
           </p>
           <div className="flex flex-wrap gap-4 mt-9">
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-spring-yellow to-spring-orange text-slate-950 font-body font-semibold text-sm hover:-translate-y-0.5 transition-all shadow-lg shadow-spring-orange/20"
+              className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-body font-semibold text-sm hover:-translate-y-0.5 transition-all shadow-lg duration-300 ${
+                dark 
+                  ? 'bg-gradient-to-r from-emerald-400 to-cyan-500 text-zinc-950 shadow-emerald-500/10 hover:shadow-emerald-500/25' 
+                  : 'bg-gradient-to-r from-indigo-500 to-violet-600 text-white shadow-indigo-600/10 hover:shadow-indigo-500/25'
+              }`}
             >
               Hire on Upwork <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#projects"
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border ${t.border} ${t.text} font-body font-semibold text-sm hover:border-spring-greenDark hover:text-spring-greenDark dark:hover:border-spring-green dark:hover:text-spring-green hover:-translate-y-0.5 transition-all`}
+              className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full border ${t.border} ${t.text} ${t.surface} font-body font-semibold text-sm hover:-translate-y-0.5 transition-all duration-300 ${
+                dark ? 'hover:border-emerald-400/40 hover:text-emerald-400' : 'hover:border-indigo-600/40 hover:text-indigo-600'
+              }`}
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-body font-semibold text-sm ${t.muted} hover:${t.accentText} transition-all`}
+              className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-body font-semibold text-sm ${t.muted} transition-all duration-300 ${
+                dark ? 'hover:text-emerald-400' : 'hover:text-indigo-600'
+              }`}
             >
               Contact
             </a>
           </div>
         </div>
-        <Reveal delay={0.2}>
-          <img
-            src="/profile.jpg"
-            alt="Rana Shahmeer Ali"
-            className="w-40 h-40 sm:w-56 sm:h-56 mx-auto rounded-full object-cover border border-spring-greenDark/20 dark:border-spring-green/20 shadow-2xl"
-          />
+        <Reveal delay={0.2} className="flex justify-center z-10">
+          <div className="relative group">
+            <div className={`absolute -inset-1 bg-gradient-to-r ${dark ? 'from-emerald-500 via-cyan-400 to-indigo-500' : 'from-indigo-500 via-purple-400 to-pink-500'} rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-tilt`} />
+            <div className={`relative w-44 h-44 sm:w-60 sm:h-60 rounded-full p-1 border shadow-2xl ${
+              dark ? 'bg-[#030712] border-zinc-800/80' : 'bg-white border-slate-200/80'
+            }`}>
+              <img
+                src="/profile.jpg"
+                alt="Rana Shahmeer Ali"
+                className="w-full h-full rounded-full object-cover transition duration-500"
+              />
+            </div>
+          </div>
         </Reveal>
       </div>
     </section>
@@ -591,7 +607,7 @@ function Hero({ t, dark }) {
 /* About                                                                */
 /* ------------------------------------------------------------------ */
 
-function About({ t }) {
+function About({ t, dark }) {
   return (
     <section id="about" className="py-20 sm:py-28">
       <div className="max-w-6xl mx-auto px-6">
@@ -613,14 +629,14 @@ function About({ t }) {
             processes into automated pipelines running in minutes.
           </p>
         </Reveal>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 mt-12">
           {STATS.map((s, i) => (
             <Reveal key={s.label} delay={0.1 + i * 0.05}>
-              <div className={`p-5 rounded-2xl border ${t.border} ${t.surface}`}>
-                <p className={`font-display font-extrabold text-2xl sm:text-3xl ${t.accentText}`}>
+              <div className={`p-6 rounded-2xl border ${t.border} ${t.surface} hover:scale-[1.03] transition-all duration-300 hover:shadow-lg ${dark ? 'hover:border-zinc-700/50 hover:shadow-emerald-950/10' : 'hover:border-indigo-100 hover:shadow-indigo-100/30'}`}>
+                <p className={`font-display font-black text-3xl sm:text-4xl bg-gradient-to-r ${dark ? 'from-emerald-400 to-cyan-400' : 'from-indigo-600 to-violet-600'} bg-clip-text text-transparent`}>
                   {s.value}
                 </p>
-                <p className={`font-body text-xs sm:text-sm ${t.mutedSoft} mt-1`}>{s.label}</p>
+                <p className={`font-body text-xs sm:text-sm ${t.muted} mt-2 font-medium tracking-wide`}>{s.label}</p>
               </div>
             </Reveal>
           ))}
@@ -634,7 +650,7 @@ function About({ t }) {
 /* Skills                                                               */
 /* ------------------------------------------------------------------ */
 
-function Skills({ t }) {
+function Skills({ t, dark }) {
   return (
     <section id="skills" className={`py-20 sm:py-28 ${t.surfaceAlt}`}>
       <div className="max-w-6xl mx-auto px-6">
@@ -646,9 +662,9 @@ function Skills({ t }) {
           {SKILL_GROUPS.map((group, i) => (
             <Reveal key={group.label} delay={(i % 2) * 0.05}>
               <div className="relative pl-6">
-                <div className="absolute left-0 top-1 bottom-1 w-px bg-gradient-to-b from-spring-greenDark/70 dark:from-spring-green/70 to-transparent" />
+                <div className={`absolute left-0 top-1 bottom-1 w-px bg-gradient-to-b ${dark ? 'from-emerald-500/70' : 'from-indigo-500/70'} to-transparent`} />
                 <div className="flex items-baseline gap-2 mb-3">
-                  <span className={`font-mono2 text-xs ${t.accentText}`}>{group.stage}</span>
+                  <span className={`font-mono2 text-xs ${t.accentText} font-semibold`}>{group.stage}</span>
                   <h3 className={`font-display font-bold text-sm tracking-wide uppercase ${t.text}`}>
                     {group.label}
                   </h3>
@@ -657,7 +673,11 @@ function Skills({ t }) {
                   {group.items.map((skill) => (
                     <span
                       key={skill}
-                      className={`font-mono2 text-xs px-3 py-1.5 rounded-full border ${t.pill} hover:border-spring-greenDark hover:text-spring-greenDark dark:hover:border-spring-green dark:hover:text-spring-green transition-colors`}
+                      className={`font-mono2 text-[11px] px-3.5 py-1.5 rounded-full border ${t.pill} transition-all duration-300 hover:scale-[1.03] ${
+                        dark 
+                          ? 'hover:border-emerald-500/50 hover:text-emerald-400 hover:bg-emerald-500/5' 
+                          : 'hover:border-indigo-600/50 hover:text-indigo-600 hover:bg-indigo-500/5'
+                      }`}
                     >
                       {skill}
                     </span>
@@ -676,7 +696,7 @@ function Skills({ t }) {
 /* Experience timeline                                                  */
 /* ------------------------------------------------------------------ */
 
-function ExperienceTimeline({ t }) {
+function ExperienceTimeline({ t, dark }) {
   return (
     <section id="experience" className="py-20 sm:py-28">
       <div className="max-w-4xl mx-auto px-6">
@@ -692,7 +712,9 @@ function ExperienceTimeline({ t }) {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 1.4, ease: "easeOut" }}
             style={{ transformOrigin: "top" }}
-            className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-spring-greenDark via-spring-greenDark/40 to-transparent dark:from-spring-green dark:via-spring-green/40"
+            className={`absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b ${
+              dark ? 'from-emerald-400 via-emerald-400/40' : 'from-indigo-600 via-indigo-600/40'
+            } to-transparent`}
           />
           <div className="flex flex-col gap-12">
             {EXPERIENCE.map((job, i) => {
@@ -700,16 +722,18 @@ function ExperienceTimeline({ t }) {
               return (
                 <Reveal key={job.role + job.dates} delay={i * 0.1} className="relative pl-14">
                   <div
-                    className={`absolute left-0 top-0 w-10 h-10 rounded-full flex items-center justify-center border-2 border-spring-greenDark dark:border-spring-green ${t.page}`}
+                    className={`absolute left-0 top-0.5 w-10 h-10 rounded-full flex items-center justify-center border-2 ${
+                      dark ? 'border-emerald-400 text-emerald-400 shadow-md shadow-emerald-500/10' : 'border-indigo-600 text-indigo-600 shadow-md shadow-indigo-500/10'
+                    } ${t.page}`}
                   >
-                    <Icon className="w-4 h-4 text-spring-greenDark dark:text-spring-green" strokeWidth={1.75} />
+                    <Icon className="w-4 h-4" strokeWidth={1.75} />
                   </div>
-                  <div className={`p-6 rounded-2xl border ${t.border} ${t.surface}`}>
+                  <div className={`p-6 sm:p-8 rounded-2xl border ${t.border} ${t.surface} hover:scale-[1.01] hover:border-zinc-700/50 hover:shadow-xl dark:hover:border-zinc-700/80 transition-all duration-300`}>
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
                       <h3 className={`font-display font-bold text-lg ${t.text}`}>{job.role}</h3>
-                      <span className={`font-mono2 text-xs ${t.accentText}`}>{job.dates}</span>
+                      <span className={`font-mono2 text-xs font-semibold ${t.accentText}`}>{job.dates}</span>
                     </div>
-                    <p className={`font-body text-sm ${t.mutedSoft} mb-4`}>{job.org}</p>
+                    <p className={`font-body text-sm ${t.mutedSoft} mb-4 font-medium`}>{job.org}</p>
                     <ul className="flex flex-col gap-2">
                       {job.bullets.map((b) => (
                         <li key={b} className={`flex gap-2 font-body text-sm ${t.muted}`}>
@@ -733,7 +757,16 @@ function ExperienceTimeline({ t }) {
 /* Projects                                                             */
 /* ------------------------------------------------------------------ */
 
-function ProjectCard({ t, project, large }) {
+function ProjectCard({ t, project, large, dark }) {
+  const getIcon = () => {
+    if (project.categories.includes("AI & GenAI")) return Cpu;
+    if (project.categories.includes("Data Engineering")) return Database;
+    if (project.categories.includes("Cloud & DevOps")) return GitBranch;
+    if (project.categories.includes("Full-Stack")) return Layers;
+    return Code2;
+  };
+  const Icon = getIcon();
+
   return (
     <motion.div
       layout
@@ -741,43 +774,63 @@ function ProjectCard({ t, project, large }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -16 }}
       transition={{ duration: 0.35 }}
-      className={`group rounded-2xl border ${t.border} ${t.surface} overflow-hidden hover:border-spring-greenDark/60 dark:hover:border-spring-green/60 hover:-translate-y-1 transition-all ${
-        large ? "sm:col-span-2" : ""
+      className={`group rounded-2xl border ${t.border} ${t.surface} overflow-hidden hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between ${
+        large ? "sm:col-span-2 shadow-md" : "shadow-sm"
+      } ${
+        dark 
+          ? 'hover:border-emerald-500/40 hover:shadow-emerald-950/15' 
+          : 'hover:border-indigo-500/40 hover:shadow-indigo-950/5'
       }`}
     >
-      <ImagePlaceholder t={t} className={`w-full ${large ? "h-56" : "h-36"}`} rounded="rounded-none" />
-      <div className="p-6">
+      <div className="p-6 flex-grow">
+        {/* Card Top Header */}
+        <div className="flex items-center justify-between mb-4">
+          <div className={`p-2.5 rounded-xl border ${t.border} ${t.surfaceAlt} ${dark ? 'text-emerald-400 border-zinc-800' : 'text-indigo-600 border-slate-200'}`}>
+            <Icon className="w-5 h-5" strokeWidth={2} />
+          </div>
+          
+          <div className="flex gap-2">
+            {project.flagship && (
+              <span className="font-mono2 text-[10px] tracking-wide uppercase px-2 py-0.5 rounded-full font-bold bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950">
+                Flagship
+              </span>
+            )}
+            <ExternalLink className={`w-4 h-4 ${t.mutedSoft} group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300`} />
+          </div>
+        </div>
+
+        {/* Categories */}
         <div className="flex flex-wrap gap-2 mb-3">
           {project.categories.map((c) => (
             <span
               key={c}
-              className={`font-mono2 text-[10px] tracking-wide uppercase px-2 py-1 rounded-full border ${t.pill}`}
+              className={`font-mono2 text-[9px] tracking-wider uppercase px-2 py-0.5 rounded-md border ${t.pill}`}
             >
               {c}
             </span>
           ))}
-          {project.flagship && (
-            <span className="font-mono2 text-[10px] tracking-wide uppercase px-2 py-1 rounded-full bg-spring-yellow text-slate-950 border border-spring-yellow">
-              Flagship
-            </span>
-          )}
         </div>
-        <h3 className={`font-display font-bold text-lg ${t.text} mb-2`}>{project.title}</h3>
-        <p className={`font-body text-sm ${t.muted} mb-4`}>{project.desc}</p>
-        <div className="flex flex-wrap gap-2">
-          {project.tech.map((tech) => (
-            <span key={tech} className={`font-mono2 text-[11px] ${t.mutedSoft}`}>
-              {tech}
-              <span className={`${t.mutedSoft} mx-1`}>&middot;</span>
-            </span>
-          ))}
-        </div>
+
+        {/* Title & Desc */}
+        <h3 className={`font-display font-bold text-lg ${t.text} mb-2 leading-snug group-hover:text-transparent group-hover:bg-clip-text ${dark ? 'group-hover:bg-gradient-to-r group-hover:from-emerald-400 group-hover:to-cyan-400' : 'group-hover:bg-gradient-to-r group-hover:from-indigo-600 group-hover:to-violet-600'} transition-all duration-300`}>
+          {project.title}
+        </h3>
+        <p className={`font-body text-sm ${t.muted} mb-4 leading-relaxed`}>{project.desc}</p>
+      </div>
+
+      {/* Tech tags */}
+      <div className={`px-6 py-4 border-t ${t.border} ${t.surfaceAlt} flex flex-wrap gap-2`}>
+        {project.tech.map((tech) => (
+          <span key={tech} className={`font-mono2 text-[10px] font-medium tracking-wide ${t.mutedSoft}`}>
+            #{tech}
+          </span>
+        ))}
       </div>
     </motion.div>
   );
 }
 
-function Projects({ t }) {
+function Projects({ t, dark }) {
   const [filter, setFilter] = useState("All");
   const filtered = useMemo(
     () =>
@@ -808,7 +861,7 @@ function Projects({ t }) {
         <motion.div layout className="grid sm:grid-cols-2 gap-6">
           <AnimatePresence mode="popLayout">
             {filtered.map((p) => (
-              <ProjectCard key={p.id} t={t} project={p} large={p.flagship} />
+              <ProjectCard key={p.id} t={t} project={p} large={p.flagship} dark={dark} />
             ))}
           </AnimatePresence>
         </motion.div>
@@ -821,7 +874,7 @@ function Projects({ t }) {
 /* Freelance / Upwork                                                   */
 /* ------------------------------------------------------------------ */
 
-function Freelance({ t }) {
+function Freelance({ t, dark }) {
   const items = [
     "AI SMS agents and RAG-based virtual assistant bots for global clients",
     "Content-to-Cash AI pipeline architecture for a growth-stage client",
@@ -834,25 +887,25 @@ function Freelance({ t }) {
         <Reveal>
           <Eyebrow t={t} index="STAGE 13" label="Freelance" />
           <SectionTitle t={t}>Top Rated on Upwork.</SectionTitle>
-          <p className={`font-body text-base ${t.muted} mb-6 max-w-md`}>
+          <p className={`font-body text-base ${t.muted} mb-6 max-w-md leading-relaxed`}>
             A 100% Job Success Score, built one delivered pipeline at a time — for law firms,
             lending startups, and AI-first companies.
           </p>
           <div className="flex flex-wrap gap-3">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-spring-yellow text-slate-950 font-body font-semibold text-sm">
+            <span className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-body font-bold text-sm shadow-md shadow-amber-500/10">
               <Award className="w-4 h-4" /> Top Rated
             </span>
-            <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border ${t.border} ${t.text} font-body font-semibold text-sm`}>
+            <span className={`inline-flex items-center gap-2 px-4.5 py-2 rounded-full border ${t.border} ${t.text} font-body font-semibold text-sm`}>
               100% Job Success
             </span>
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <div className={`p-6 sm:p-8 rounded-2xl border ${t.border} ${t.surface}`}>
+          <div className={`p-6 sm:p-8 rounded-2xl border ${t.border} ${t.surface} hover:shadow-xl transition-all duration-300`}>
             <ul className="flex flex-col gap-4">
               {items.map((item) => (
                 <li key={item} className="flex gap-3">
-                  <div className="w-2 h-2 rounded-full bg-spring-greenDark dark:bg-spring-green mt-2 shrink-0" />
+                  <div className={`w-2 h-2 rounded-full mt-2 shrink-0 ${dark ? 'bg-emerald-400 shadow-sm shadow-emerald-400/20' : 'bg-indigo-600 shadow-sm shadow-indigo-600/20'}`} />
                   <span className={`font-body text-sm ${t.muted}`}>{item}</span>
                 </li>
               ))}
@@ -861,7 +914,11 @@ function Freelance({ t }) {
               href="https://www.upwork.com/"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-full bg-gradient-to-r from-spring-yellow to-spring-orange text-slate-950 font-body font-semibold text-sm hover:brightness-110 transition-all shadow-lg shadow-spring-orange/20"
+              className={`inline-flex items-center gap-2 mt-8 px-6 py-3.5 rounded-full font-body font-semibold text-sm hover:-translate-y-0.5 transition-all shadow-lg duration-300 ${
+                dark 
+                  ? 'bg-gradient-to-r from-emerald-400 to-cyan-500 text-zinc-950 shadow-emerald-500/10 hover:shadow-emerald-500/20' 
+                  : 'bg-gradient-to-r from-indigo-500 to-violet-600 text-white shadow-indigo-500/10 hover:shadow-indigo-500/20'
+              }`}
             >
               Hire Me on Upwork <ExternalLink className="w-4 h-4" />
             </a>
@@ -876,7 +933,7 @@ function Freelance({ t }) {
 /* Education & certifications                                          */
 /* ------------------------------------------------------------------ */
 
-function Education({ t }) {
+function Education({ t, dark }) {
   return (
     <section id="education" className={`py-20 sm:py-28 ${t.surfaceAlt}`}>
       <div className="max-w-6xl mx-auto px-6">
@@ -886,8 +943,8 @@ function Education({ t }) {
         </Reveal>
         <div className="grid sm:grid-cols-3 gap-6">
           <Reveal>
-            <div className={`p-6 rounded-2xl border ${t.border} ${t.surface} h-full`}>
-              <GraduationCap className={`w-6 h-6 ${t.accentText} mb-4`} strokeWidth={1.5} />
+            <div className={`p-6 rounded-2xl border ${t.border} ${t.surface} h-full hover:scale-[1.02] hover:border-zinc-700/50 hover:shadow-xl dark:hover:border-zinc-700/80 transition-all duration-300`}>
+              <GraduationCap className={`w-6 h-6 ${dark ? 'text-emerald-400' : 'text-indigo-600'} mb-4`} strokeWidth={1.5} />
               <h3 className={`font-display font-bold ${t.text} mb-1`}>
                 BS Computer Science
               </h3>
@@ -898,8 +955,8 @@ function Education({ t }) {
           </Reveal>
           {CERTS.map((c, i) => (
             <Reveal key={c.name} delay={0.05 + i * 0.05}>
-              <div className={`p-6 rounded-2xl border ${t.border} ${t.surface} h-full`}>
-                <Award className={`w-6 h-6 ${t.accentText} mb-4`} strokeWidth={1.5} />
+              <div className={`p-6 rounded-2xl border ${t.border} ${t.surface} h-full hover:scale-[1.02] hover:border-zinc-700/50 hover:shadow-xl dark:hover:border-zinc-700/80 transition-all duration-300`}>
+                <Award className={`w-6 h-6 ${dark ? 'text-emerald-400' : 'text-indigo-600'} mb-4`} strokeWidth={1.5} />
                 <h3 className={`font-display font-bold ${t.text} mb-1`}>{c.name}</h3>
                 <p className={`font-body text-sm ${t.mutedSoft}`}>{c.org}</p>
               </div>
@@ -915,7 +972,7 @@ function Education({ t }) {
 /* Contact                                                              */
 /* ------------------------------------------------------------------ */
 
-function Contact({ t }) {
+function Contact({ t, dark }) {
   return (
     <section id="contact" className="py-24 sm:py-32">
       <div className="max-w-3xl mx-auto px-6 text-center">
@@ -936,7 +993,11 @@ function Contact({ t }) {
           <div className="flex flex-wrap justify-center gap-4">
             <a
               href="mailto:ranashahmeerali@gmail.com"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-spring-yellow to-spring-orange text-slate-950 font-body font-semibold text-sm hover:-translate-y-0.5 transition-all shadow-lg shadow-spring-orange/20"
+              className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-body font-semibold text-sm hover:-translate-y-0.5 transition-all shadow-lg duration-300 ${
+                dark 
+                  ? 'bg-gradient-to-r from-emerald-400 to-cyan-500 text-zinc-950 shadow-emerald-500/10 hover:shadow-emerald-500/25' 
+                  : 'bg-gradient-to-r from-indigo-500 to-violet-600 text-white shadow-indigo-500/10 hover:shadow-indigo-500/25'
+              }`}
             >
               <Mail className="w-4 h-4" /> Email Me
             </a>
@@ -944,7 +1005,9 @@ function Contact({ t }) {
               href="https://linkedin.com/in/rana-shahmeer-ali-479592263"
               target="_blank"
               rel="noreferrer"
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border ${t.border} ${t.text} font-body font-semibold text-sm hover:border-spring-greenDark hover:text-spring-greenDark dark:hover:border-spring-green dark:hover:text-spring-green hover:-translate-y-0.5 transition-all`}
+              className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full border ${t.border} ${t.text} ${t.surface} font-body font-semibold text-sm hover:-translate-y-0.5 transition-all duration-300 ${
+                dark ? 'hover:border-emerald-400 hover:text-emerald-400' : 'hover:border-indigo-600 hover:text-indigo-600'
+              }`}
             >
               <Linkedin className="w-4 h-4" /> LinkedIn
             </a>
@@ -952,7 +1015,9 @@ function Contact({ t }) {
               href="https://github.com/Ranashahmeer"
               target="_blank"
               rel="noreferrer"
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border ${t.border} ${t.text} font-body font-semibold text-sm hover:border-spring-greenDark hover:text-spring-greenDark dark:hover:border-spring-green dark:hover:text-spring-green hover:-translate-y-0.5 transition-all`}
+              className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full border ${t.border} ${t.text} ${t.surface} font-body font-semibold text-sm hover:-translate-y-0.5 transition-all duration-300 ${
+                dark ? 'hover:border-emerald-400 hover:text-emerald-400' : 'hover:border-indigo-600 hover:text-indigo-600'
+              }`}
             >
               <Github className="w-4 h-4" /> GitHub
             </a>
@@ -960,7 +1025,9 @@ function Contact({ t }) {
               href="https://www.upwork.com/"
               target="_blank"
               rel="noreferrer"
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-body font-semibold text-sm ${t.muted} hover:${t.accentText} transition-all`}
+              className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-body font-semibold text-sm ${t.muted} transition-all duration-300 ${
+                dark ? 'hover:text-emerald-400' : 'hover:text-indigo-600'
+              }`}
             >
               Upwork Profile
             </a>
@@ -1003,21 +1070,26 @@ function Footer({ t }) {
 /* ------------------------------------------------------------------ */
 
 export default function App() {
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(true);
   const t = getTheme(dark);
 
   return (
-    <div className={`min-h-screen ${t.page} ${t.text} transition-colors duration-300`}>
+    <div className={`min-h-screen ${t.page} ${t.text} transition-colors duration-300 relative overflow-hidden`}>
+      {/* Background Animated Blobs */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-3xl animate-blob pointer-events-none" />
+      <div className="absolute top-[35%] right-20 w-96 h-96 bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full blur-3xl animate-blob animation-delay-2000 pointer-events-none" />
+      <div className="absolute bottom-[20%] left-20 w-80 h-80 bg-indigo-500/10 dark:bg-indigo-500/5 rounded-full blur-3xl animate-blob animation-delay-4000 pointer-events-none" />
+
       <FontImport />
       <Nav t={t} dark={dark} setDark={setDark} />
       <Hero t={t} dark={dark} />
-      <About t={t} />
-      <Skills t={t} />
-      <ExperienceTimeline t={t} />
-      <Projects t={t} />
-      <Freelance t={t} />
-      <Education t={t} />
-      <Contact t={t} />
+      <About t={t} dark={dark} />
+      <Skills t={t} dark={dark} />
+      <ExperienceTimeline t={t} dark={dark} />
+      <Projects t={t} dark={dark} />
+      <Freelance t={t} dark={dark} />
+      <Education t={t} dark={dark} />
+      <Contact t={t} dark={dark} />
       <Footer t={t} />
     </div>
   );
