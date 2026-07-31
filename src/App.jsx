@@ -12,6 +12,7 @@ import {
   X,
   Image as ImageIcon,
   ArrowRight,
+  ArrowUpRight,
   Database,
   Cloud,
   Cpu,
@@ -24,6 +25,10 @@ import {
   Award,
   Briefcase,
   ChevronRight,
+  Sparkles,
+  Zap,
+  ShieldCheck,
+  CheckCircle2,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -32,12 +37,12 @@ import {
 
 const FontImport = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
     html { scroll-behavior: smooth; }
-    .font-display { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+    .font-display { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
     .font-body { font-family: 'Inter', sans-serif; }
-    .font-mono2 { font-family: 'JetBrains Mono', monospace; }
-    ::selection { background: rgba(190, 242, 100, 0.4); }
+    .font-tag { font-family: 'JetBrains Mono', monospace; }
+    ::selection { background: rgba(99, 102, 241, 0.35); }
   `}</style>
 );
 
@@ -149,7 +154,7 @@ const EXPERIENCE = [
   },
   {
     role: "Data Engineer",
-    org: "Sitpros & Technologies — Pakistan office of Focusync",
+    org: "Sitpros & Technologies",
     dates: "2023 — 2024",
     icon: Database,
     bullets: [
@@ -292,9 +297,39 @@ const PROJECTS = [
   },
 ];
 
+const AnthropicIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className={props.className}>
+    <path d="M12 2L2 22h4l3-7h6l3 7h4L12 2zM10 12l2-5 2 5h-4z" />
+  </svg>
+);
+
 const CERTS = [
-  { name: "Advanced Python for Data Science", org: "NED University of Engineering & Technology" },
-  { name: "Cloud Data Engineering", org: "SMIT (Saylani Mass IT Training)" },
+  { name: "Advanced Python for Data Science", org: "NED University of Engineering & Technology", icon: Award },
+  { name: "Cloud Data Engineering", org: "SMIT (Saylani Mass IT Training)", icon: Award },
+  { name: "Claude 101", org: "Anthropic", tag: "Issued Jul 2026", cred: "jmym7da2sxsq", icon: AnthropicIcon },
+];
+
+const FEATURES = [
+  {
+    icon: Zap,
+    title: "Automated pipelines",
+    desc: "Manual, multi-day processes rebuilt into automated ETL that runs in minutes, not days.",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud-native infra",
+    desc: "Production data platforms on AWS and Snowflake, provisioned with Terraform and Docker.",
+  },
+  {
+    icon: Sparkles,
+    title: "AI & GenAI integration",
+    desc: "LLM-powered compliance pipelines, RAG agents, and NL-to-SQL systems shipped to production.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Reliability first",
+    desc: "Checksum-verified migrations, validation engines, and CI/CD — built to hold up under load.",
+  },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -304,32 +339,38 @@ const CERTS = [
 function getTheme(dark) {
   return dark
     ? {
-        page: "bg-[#09090b]",
-        nav: "bg-[#09090b]/90 border-zinc-800",
-        surface: "bg-transparent border border-zinc-800",
-        surfaceAlt: "bg-zinc-900/10",
-        border: "border-zinc-800",
-        text: "text-zinc-100",
-        muted: "text-zinc-400",
-        mutedSoft: "text-zinc-500",
-        pill: "bg-transparent text-zinc-300 border-zinc-800",
-        pillActive: "bg-lime-400 text-black border-lime-400 font-bold",
-        accentText: "text-lime-300",
-        placeholderBg: "from-zinc-950 to-zinc-900",
+        page: "bg-[#080A11]",
+        nav: "bg-[#080A11]/70 border-white/[0.06]",
+        surface: "bg-[#10141F] border border-white/[0.07]",
+        surfaceAlt: "bg-[#0C0F17]",
+        border: "border-white/[0.08]",
+        divide: "divide-white/[0.06]",
+        text: "text-slate-100",
+        muted: "text-slate-400",
+        mutedSoft: "text-slate-500",
+        pill: "bg-white/[0.03] text-slate-300 border-white/[0.08]",
+        pillActive: "bg-indigo-500 text-white border-indigo-500",
+        accentText: "text-indigo-400",
+        accentBg: "bg-indigo-500",
+        glow: "hover:shadow-[0_0_45px_-12px_rgba(99,102,241,0.45)] hover:border-indigo-500/40",
+        placeholderBg: "from-[#10141F] to-[#0C0F17]",
       }
     : {
-        page: "bg-[#fafafa]",
-        nav: "bg-[#fafafa]/90 border-slate-200",
-        surface: "bg-transparent border border-slate-200",
-        surfaceAlt: "bg-slate-50",
+        page: "bg-[#F7F8FB]",
+        nav: "bg-[#F7F8FB]/75 border-slate-200",
+        surface: "bg-white border border-slate-200",
+        surfaceAlt: "bg-slate-100/70",
         border: "border-slate-200",
-        text: "text-zinc-900",
-        muted: "text-zinc-600",
-        mutedSoft: "text-zinc-400",
-        pill: "bg-transparent text-zinc-700 border-slate-200",
-        pillActive: "bg-indigo-600 text-white border-indigo-600 font-bold",
+        divide: "divide-slate-200",
+        text: "text-slate-900",
+        muted: "text-slate-600",
+        mutedSoft: "text-slate-400",
+        pill: "bg-slate-100 text-slate-600 border-slate-200",
+        pillActive: "bg-indigo-600 text-white border-indigo-600",
         accentText: "text-indigo-600",
-        placeholderBg: "from-slate-50 to-slate-100",
+        accentBg: "bg-indigo-600",
+        glow: "hover:shadow-[0_0_45px_-15px_rgba(79,70,229,0.35)] hover:border-indigo-400/50",
+        placeholderBg: "from-slate-100 to-slate-200",
       };
 }
 
@@ -343,24 +384,19 @@ function ImagePlaceholder({ t, className = "", label = "Image coming soon", roun
       className={`relative flex flex-col items-center justify-center gap-2 bg-gradient-to-br ${t.placeholderBg} border ${t.border} ${rounded} ${className}`}
     >
       <ImageIcon className={`w-6 h-6 ${t.mutedSoft}`} strokeWidth={1.5} />
-      <span className={`font-mono2 text-[11px] tracking-wide uppercase ${t.mutedSoft}`}>{label}</span>
+      <span className={`font-tag text-[11px] tracking-wide uppercase ${t.mutedSoft}`}>{label}</span>
     </div>
   );
 }
 
-function Eyebrow({ t, index, label }) {
+function Eyebrow({ t, dark, label }) {
   return (
-    <div className="flex items-center gap-3 mb-3">
-      <span className={`font-mono2 text-xs tracking-widest ${t.accentText}`}>{index}</span>
-      <span className={`h-px w-8 bg-gradient-to-r from-current to-transparent ${t.accentText}`} />
-      <span className={`font-mono2 text-xs tracking-[0.2em] uppercase ${t.mutedSoft}`}>{label}</span>
+    <div
+      className={`inline-flex items-center gap-2 mb-5 px-3.5 py-1.5 rounded-full border ${t.border} ${t.surfaceAlt} font-body text-xs font-medium ${t.muted}`}
+    >
+      <span className={`w-1.5 h-1.5 rounded-full ${t.accentBg}`} />
+      {label}
     </div>
-  );
-}
-
-function SectionTitle({ t, children }) {
-  return (
-    <h2 className={`font-display font-extrabold text-3xl sm:text-4xl ${t.text} mb-8`}>{children}</h2>
   );
 }
 
@@ -379,12 +415,12 @@ function Reveal({ children, delay = 0, className = "" }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Hero pipeline background (signature element)                        */
+/* Hero pipeline background (signature element, recolored to glow)     */
 /* ------------------------------------------------------------------ */
 
 function PipelineBackdrop({ dark }) {
-  const stroke = dark ? "#1B2B1F" : "#E1EBC2";
-  const flow = dark ? "#A1CB35" : "#769826";
+  const stroke = dark ? "rgba(148,163,184,0.08)" : "rgba(100,116,139,0.12)";
+  const flow = dark ? "#818CF8" : "#6366F1";
   const paths = [
     "M -50 80 C 200 80, 250 200, 500 200 S 800 320, 1050 320",
     "M -50 220 C 150 220, 300 60, 550 60 S 850 180, 1050 180",
@@ -394,9 +430,18 @@ function PipelineBackdrop({ dark }) {
     <svg
       viewBox="0 0 1000 400"
       preserveAspectRatio="none"
-      className="absolute inset-0 w-full h-full opacity-70"
+      className="absolute inset-0 w-full h-full opacity-80"
       aria-hidden="true"
     >
+      <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
       {paths.map((d, i) => (
         <g key={i}>
           <path d={d} fill="none" stroke={stroke} strokeWidth="1.5" />
@@ -407,6 +452,7 @@ function PipelineBackdrop({ dark }) {
             strokeWidth="2"
             strokeLinecap="round"
             strokeDasharray="2 22"
+            filter="url(#glow)"
             initial={{ strokeDashoffset: 0 }}
             animate={{ strokeDashoffset: -240 }}
             transition={{
@@ -415,7 +461,7 @@ function PipelineBackdrop({ dark }) {
               ease: "linear",
               delay: i * 0.8,
             }}
-            style={{ opacity: 0.9 }}
+            style={{ opacity: 0.85 }}
           />
         </g>
       ))}
@@ -439,41 +485,63 @@ const NAV_LINKS = [
 
 function Nav({ t, dark, setDark }) {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <div className={`fixed top-0 inset-x-0 z-50 backdrop-blur-sm border-b ${t.nav} transition-all duration-300`}>
-      <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-        <a href="#top" className="font-mono2 text-xs tracking-tight hover:opacity-80 transition-opacity">
-          ~/rana_shahmeer_ali<span className={dark ? "text-lime-400" : "text-indigo-600"}>/</span>
+    <div
+      className={`fixed top-0 inset-x-0 z-50 backdrop-blur-md border-b transition-all duration-300 ${t.nav} ${
+        scrolled ? "shadow-[0_8px_30px_-15px_rgba(0,0,0,0.4)]" : ""
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="#top" className="font-display text-base tracking-tight hover:opacity-80 transition-opacity flex items-center gap-2">
+          Rana Shahmeer Ali
         </a>
-        
-        <div className="hidden md:flex items-center gap-6">
+
+        <div className={`hidden md:flex items-center gap-1 rounded-full border px-1.5 py-1.5 ${t.border} ${t.surfaceAlt}`}>
           {NAV_LINKS.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className={`font-mono2 text-[11px] uppercase tracking-wider ${t.muted} hover:${dark ? 'text-lime-300' : 'text-indigo-600'} transition-colors relative py-1`}
+              className={`font-body text-[13px] font-medium ${t.muted} px-3.5 py-1.5 rounded-full hover:bg-white/[0.06] transition-colors ${
+                dark ? "hover:text-slate-100" : "hover:text-slate-900"
+              }`}
             >
               {l.label}
             </a>
           ))}
         </div>
-        
-        <div className="flex items-center gap-4">
+
+        <div className="flex items-center gap-3">
           <button
             onClick={() => setDark(!dark)}
-            className={`font-mono2 text-[10px] uppercase tracking-widest border border-current px-2.5 py-1 transition-all ${
-              dark ? 'text-lime-300 hover:bg-lime-400 hover:text-black' : 'text-indigo-600 hover:bg-indigo-600 hover:text-white'
+            aria-label="Toggle theme"
+            className={`w-9 h-9 flex items-center justify-center rounded-full border ${t.border} ${t.muted} transition-colors ${
+              dark ? "hover:text-indigo-400" : "hover:text-indigo-600"
             }`}
           >
-            {dark ? 'LIGHT_MODE' : 'DARK_MODE'}
+            {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
-          
+
+          <a
+            href="#contact"
+            className={`hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-body text-[13px] font-semibold text-white ${t.accentBg} transition-all duration-200 shadow-[0_0_25px_-8px_rgba(99,102,241,0.6)] hover:shadow-[0_0_35px_-6px_rgba(99,102,241,0.8)] hover:brightness-110`}
+          >
+            Let&apos;s talk
+          </a>
+
           <button
-            className={`md:hidden font-mono2 text-[10px] border border-current px-2 py-0.5 ${t.muted}`}
+            className={`md:hidden w-9 h-9 flex items-center justify-center rounded-full border ${t.border} ${t.muted}`}
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
-            {open ? 'CLOSE' : 'MENU'}
+            {open ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
       </div>
@@ -485,13 +553,13 @@ function Nav({ t, dark, setDark }) {
             exit={{ height: 0, opacity: 0 }}
             className={`md:hidden border-t ${t.border} ${t.page} overflow-hidden`}
           >
-            <div className="px-6 py-4 flex flex-col gap-3">
+            <div className="px-6 py-4 flex flex-col gap-1">
               {NAV_LINKS.map((l) => (
                 <a
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className={`font-mono2 text-xs uppercase ${t.muted}`}
+                  className={`font-body text-sm py-2.5 ${t.muted}`}
                 >
                   {l.label}
                 </a>
@@ -534,78 +602,105 @@ function useTypingEffect(words, typeSpeed = 55, pause = 1400) {
 }
 
 function Hero({ t, dark }) {
-  return (
-    <section id="top" className="relative pt-24 pb-20 sm:pt-32 sm:pb-28 border-b border-zinc-800/80 dark:border-zinc-800/80">
-      <div className="relative max-w-7xl mx-auto px-6 grid md:grid-cols-[1.3fr_0.7fr] gap-12 items-start">
-        <div className="z-10">
-          {/* Metadata label */}
-          <div className="flex items-center gap-2 mb-6 font-mono2 text-[10px] uppercase tracking-widest text-zinc-500">
-            <span>[REF: RSA_HERO_V1.1]</span>
-            <span>&middot;</span>
-            <span className={dark ? "text-lime-300 font-bold" : "text-indigo-600 font-bold"}>SYS_STATUS: READY</span>
-          </div>
+  const typed = useTypingEffect(ROLES);
 
-          <h1 className="font-display font-black text-5xl sm:text-7xl lg:text-8xl leading-none uppercase tracking-tighter mb-6">
-            Rana<br />Shahmeer Ali
+  return (
+    <section id="top" className="relative pt-32 pb-24 sm:pt-40 sm:pb-32 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <PipelineBackdrop dark={dark} />
+        <div
+          className={`absolute -top-32 left-1/3 w-[500px] h-[500px] rounded-full blur-3xl ${
+            dark ? "bg-indigo-600/10" : "bg-indigo-400/10"
+          }`}
+        />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6 grid md:grid-cols-[1.25fr_0.75fr] gap-14 items-center">
+        <div className="z-10">
+          <Eyebrow t={t} dark={dark} label="Available for new engagements" />
+
+          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl leading-[1.03] mb-6">
+            Ship pipelines.<br />
+            <span className={t.accentText}>Not delays.</span>
           </h1>
 
-          <p className="font-mono2 text-xs uppercase tracking-widest text-zinc-500 mb-8">
-            Karachi, Pakistan &middot; Open to relocation (Saudi Arabia)
-          </p>
-
-          <p className={`font-body text-lg sm:text-xl ${t.muted} max-w-xl leading-relaxed mb-10`}>
+          <p className={`font-body text-lg sm:text-xl ${t.muted} max-w-xl leading-relaxed mb-8`}>
             I turn manual, multi-day data processes into automated pipelines that run in
             minutes — for fintech platforms and Upwork clients alike.
           </p>
 
-          {/* Stacked Roles list */}
-          <div className={`flex flex-col gap-2 font-mono2 text-xs uppercase tracking-wider pl-4 border-l border-zinc-700/60 mb-10`}>
-            {ROLES.map((role, idx) => (
-              <div key={role} className="flex items-center gap-2.5">
-                <span className={dark ? "text-lime-400" : "text-indigo-600"}>[0{idx + 1}]</span>
-                <span className={idx === 0 ? "font-bold text-zinc-200" : "text-zinc-400"}>{role}</span>
-                {idx === 0 && <span className={`inline-block w-1.5 h-1.5 rounded-full ${dark ? 'bg-lime-400 animate-ping' : 'bg-indigo-600 animate-ping'}`} />}
-              </div>
-            ))}
+          <div className={`font-body text-sm font-medium mb-10 h-6 flex items-center gap-2`}>
+            <span className={t.mutedSoft}>Currently working as a</span>
+            <span className={`font-semibold ${t.accentText}`}>
+              {typed}
+              <span className="inline-block w-[2px] h-4 bg-current ml-0.5 align-middle animate-pulse" />
+            </span>
           </div>
 
           <div className="flex flex-wrap gap-4">
             <a
               href="#contact"
-              className={`px-6 py-3.5 rounded-none font-mono2 text-[11px] uppercase tracking-widest transition-all duration-200 ${
-                dark 
-                  ? 'bg-lime-400 text-black border border-lime-400 hover:bg-transparent hover:text-lime-300' 
-                  : 'bg-indigo-600 text-white border border-indigo-600 hover:bg-transparent hover:text-indigo-600'
-              }`}
+              className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-body text-sm font-semibold text-white ${t.accentBg} transition-all duration-200 shadow-[0_0_30px_-8px_rgba(99,102,241,0.65)] hover:shadow-[0_0_40px_-6px_rgba(99,102,241,0.85)] hover:brightness-110`}
             >
-              Hire on Upwork &rarr;
+              Hire on Upwork <ArrowUpRight className="w-4 h-4" />
             </a>
             <a
               href="#projects"
-              className={`px-6 py-3.5 rounded-none border border-current font-mono2 text-[11px] uppercase tracking-widest transition-all duration-200 bg-transparent hover:opacity-80`}
+              className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full border ${t.border} font-body text-sm font-semibold ${t.text} transition-all duration-200 hover:bg-white/[0.05]`}
             >
               View Projects
             </a>
           </div>
         </div>
-        
+
         <Reveal delay={0.2} className="flex justify-center md:justify-end z-10 w-full">
-          <div className="relative group max-w-xs sm:max-w-sm w-full mt-8 md:mt-0">
-            {/* Coordinate markings */}
-            <span className="absolute -top-5 left-0 font-mono2 text-[9px] text-zinc-500 uppercase">[SYS_COORD: X-104_Y-290]</span>
-            <span className="absolute -bottom-5 right-0 font-mono2 text-[9px] text-zinc-500 uppercase">[LOC: KHI_PK]</span>
-            
-            <div className={`border p-2.5 rounded-none ${
-              dark ? 'border-zinc-800 bg-zinc-950/40' : 'bg-white border-slate-200'
-            }`}>
+          <div className="relative max-w-xs sm:max-w-sm w-full">
+            <div
+              className={`absolute -inset-3 rounded-[2rem] blur-2xl opacity-40 ${
+                dark ? "bg-gradient-to-br from-indigo-500/40 to-sky-400/10" : "bg-gradient-to-br from-indigo-300/40 to-sky-200/20"
+              }`}
+            />
+            <div className={`relative border p-2 rounded-3xl ${t.surface} shadow-2xl`}>
               <img
                 src="/profile.jpg"
                 alt="Rana Shahmeer Ali"
-                className="w-full rounded-none grayscale filter contrast-125 border border-current"
+                className="w-full rounded-2xl object-cover"
               />
             </div>
           </div>
         </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Feature grid — new, Miraal-style capability cards                   */
+/* ------------------------------------------------------------------ */
+
+function FeatureGrid({ t, dark }) {
+  return (
+    <section className="py-20 sm:py-24">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {FEATURES.map((f, i) => (
+            <Reveal key={f.title} delay={i * 0.06}>
+              <div
+                className={`group h-full rounded-2xl border p-6 transition-all duration-300 ${t.surface} ${t.glow}`}
+              >
+                <div
+                  className={`w-11 h-11 rounded-xl flex items-center justify-center mb-5 border ${t.border} ${
+                    dark ? "bg-indigo-500/10" : "bg-indigo-50"
+                  }`}
+                >
+                  <f.icon className={`w-5 h-5 ${t.accentText}`} strokeWidth={1.75} />
+                </div>
+                <h3 className={`font-display text-base mb-2 ${t.text}`}>{f.title}</h3>
+                <p className={`font-body text-sm leading-relaxed ${t.muted}`}>{f.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -617,17 +712,13 @@ function Hero({ t, dark }) {
 
 function About({ t, dark }) {
   return (
-    <section id="about" className="py-20 sm:py-28 border-b border-zinc-800/80 dark:border-zinc-800/80">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-20 items-start">
+    <section id="about" className="py-20 sm:py-28">
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-[1.1fr_0.9fr] gap-14 items-start">
         <div className="z-10">
           <Reveal>
-            <div className="flex items-center gap-2 mb-4 font-mono2 text-[10px] uppercase tracking-widest text-zinc-500">
-              <span>[STAGE 00]</span>
-              <span>&middot;</span>
-              <span>OVERVIEW</span>
-            </div>
-            <h2 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter mb-8 leading-none">
-              Extract,<br />transform,<br />deliver.
+            <Eyebrow t={t} dark={dark} label="Overview" />
+            <h2 className="font-display text-4xl sm:text-5xl mb-7 leading-[1.05]">
+              Extract, transform,<br />deliver.
             </h2>
           </Reveal>
           <Reveal delay={0.05}>
@@ -645,20 +736,17 @@ function About({ t, dark }) {
             </p>
           </Reveal>
         </div>
-        
-        <Reveal delay={0.1} className="z-10 w-full">
-          <div className="font-mono2 text-xs uppercase tracking-wider">
-            <span className="text-[10px] text-zinc-500 block mb-4">// PERFORMANCE_METRICS_LOG</span>
-            <div className={`border-t border-b ${t.border} divide-y ${t.border}`}>
-              {STATS.map((s, i) => (
-                <div key={s.label} className="grid grid-cols-[30px_1fr_auto] items-center py-4">
-                  <span className="text-zinc-500">0{i + 1}.</span>
-                  <span className="text-zinc-400">{s.label}</span>
-                  <span className={`font-bold ${dark ? 'text-lime-300' : 'text-indigo-600'}`}>{s.value}</span>
-                </div>
-              ))}
+
+        <Reveal delay={0.1} className="z-10 w-full grid grid-cols-2 gap-4">
+          {STATS.map((s, i) => (
+            <div
+              key={s.label}
+              className={`rounded-2xl border p-5 transition-all duration-300 ${t.surface} ${t.glow}`}
+            >
+              <div className={`font-display text-3xl mb-1 ${t.accentText}`}>{s.value}</div>
+              <div className={`font-body text-xs ${t.muted}`}>{s.label}</div>
             </div>
-          </div>
+          ))}
         </Reveal>
       </div>
     </section>
@@ -671,38 +759,32 @@ function About({ t, dark }) {
 
 function Skills({ t, dark }) {
   return (
-    <section id="skills" className={`py-20 sm:py-28 border-b border-zinc-800/80 dark:border-zinc-800/80 ${t.surfaceAlt}`}>
+    <section id="skills" className={`py-20 sm:py-28 ${t.surfaceAlt}`}>
       <div className="max-w-7xl mx-auto px-6">
         <Reveal>
-          <div className="flex items-center gap-2 mb-4 font-mono2 text-[10px] uppercase tracking-widest text-zinc-500">
-            <span>[STAGE 01–10]</span>
-            <span>&middot;</span>
-            <span>Technical Index</span>
-          </div>
-          <h2 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter mb-12 leading-none">
-            Every stage<br />of the pipeline.
+          <Eyebrow t={t} dark={dark} label="Technical index" />
+          <h2 className="font-display text-4xl sm:text-5xl mb-12 leading-[1.05]">
+            Every stage of<br />the pipeline.
           </h2>
         </Reveal>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 mt-4 divide-y md:divide-y-0 divide-zinc-800/40">
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {SKILL_GROUPS.map((group, i) => (
-            <Reveal key={group.label} delay={(i % 3) * 0.05} className="pt-8 md:pt-0">
-              <div className="flex flex-col">
-                <div className="flex items-baseline gap-2 pb-3 border-b border-zinc-800/60 dark:border-zinc-800/60 mb-4">
-                  <span className={`font-mono2 text-xs font-semibold ${dark ? 'text-lime-300' : 'text-indigo-600'}`}>{group.stage}.</span>
-                  <h3 className={`font-display font-bold text-sm tracking-wide uppercase ${t.text}`}>
-                    {group.label}
-                  </h3>
-                </div>
-                
-                <ul className="flex flex-col divide-y divide-zinc-800/30 dark:divide-zinc-800/30 font-mono2 text-[11px] uppercase tracking-wide">
+            <Reveal key={group.label} delay={(i % 3) * 0.05}>
+              <div
+                className={`h-full rounded-2xl border p-6 transition-all duration-300 ${t.surface} ${t.glow}`}
+              >
+                <h3 className={`font-display text-base mb-4 ${t.text}`}>{group.label}</h3>
+                <div className="flex flex-wrap gap-2">
                   {group.items.map((skill) => (
-                    <li key={skill} className="py-2.5 flex items-center justify-between hover:translate-x-1 transition-transform duration-200">
-                      <span className="text-zinc-400">{skill}</span>
-                      <span className={`text-[9px] font-bold ${dark ? 'text-lime-400/70' : 'text-indigo-500/70'}`}>[STABLE]</span>
-                    </li>
+                    <span
+                      key={skill}
+                      className={`font-body text-xs px-3 py-1.5 rounded-full border ${t.border} ${t.muted}`}
+                    >
+                      {skill}
+                    </span>
                   ))}
-                </ul>
+                </div>
               </div>
             </Reveal>
           ))}
@@ -718,50 +800,50 @@ function Skills({ t, dark }) {
 
 function ExperienceTimeline({ t, dark }) {
   return (
-    <section id="experience" className="py-20 sm:py-28 border-b border-zinc-800/80 dark:border-zinc-800/80">
+    <section id="experience" className="py-20 sm:py-28">
       <div className="max-w-7xl mx-auto px-6">
         <Reveal>
-          <div className="flex items-center gap-2 mb-4 font-mono2 text-[10px] uppercase tracking-widest text-zinc-500">
-            <span>[STAGE 11]</span>
-            <span>&middot;</span>
-            <span>Experience Log</span>
-          </div>
-          <h2 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter mb-12 leading-none">
+          <Eyebrow t={t} dark={dark} label="Experience log" />
+          <h2 className="font-display text-4xl sm:text-5xl mb-14 leading-[1.05]">
             Where the pipelines<br />were built.
           </h2>
         </Reveal>
-        
-        <div className={`border-t border-b ${t.border} divide-y ${t.border} mt-10`}>
-          {EXPERIENCE.map((job, idx) => {
-            return (
-              <Reveal key={job.role + job.dates} className="py-8">
-                <div className="grid md:grid-cols-[40px_1fr_auto] gap-6 items-start">
-                  <span className="font-mono2 text-xs text-zinc-500 font-bold">0{idx + 1}.</span>
-                  
-                  <div>
-                    <h3 className={`font-display font-bold text-lg sm:text-xl uppercase tracking-tight ${t.text} mb-1`}>
-                      {job.role}
-                    </h3>
-                    <p className={`font-mono2 text-[11px] uppercase tracking-wider font-bold mb-6 ${dark ? 'text-lime-300' : 'text-indigo-600'}`}>
-                      {job.org}
-                    </p>
-                    
-                    <ul className="flex flex-col gap-3 font-body text-sm text-zinc-400 max-w-2xl pl-4 border-l border-zinc-800/80 dark:border-zinc-800/80">
+
+        <div className="relative pl-8 sm:pl-10">
+          <div className={`absolute left-[11px] sm:left-[13px] top-2 bottom-2 w-px ${dark ? "bg-white/10" : "bg-slate-200"}`} />
+          <div className="flex flex-col gap-10">
+            {EXPERIENCE.map((job, idx) => {
+              const Icon = job.icon;
+              return (
+                <Reveal key={job.role + job.dates} delay={idx * 0.05} className="relative">
+                  <div
+                    className={`absolute -left-8 sm:-left-10 top-1 w-6 h-6 rounded-full flex items-center justify-center border-2 ${
+                      dark ? "bg-[#080A11] border-indigo-500" : "bg-[#F7F8FB] border-indigo-500"
+                    }`}
+                  >
+                    <Icon className={`w-3 h-3 ${t.accentText}`} />
+                  </div>
+
+                  <div className={`rounded-2xl border p-6 sm:p-7 transition-all duration-300 ${t.surface} ${t.glow}`}>
+                    <div className="flex flex-wrap items-baseline justify-between gap-3 mb-1">
+                      <h3 className={`font-display text-lg sm:text-xl ${t.text}`}>{job.role}</h3>
+                      <span className={`font-body text-xs font-medium ${t.mutedSoft}`}>{job.dates}</span>
+                    </div>
+                    <p className={`font-body text-sm font-semibold mb-5 ${t.accentText}`}>{job.org}</p>
+
+                    <ul className="flex flex-col gap-2.5">
                       {job.bullets.map((b) => (
-                        <li key={b} className="leading-relaxed">
+                        <li key={b} className={`font-body text-sm leading-relaxed ${t.muted} flex gap-2.5`}>
+                          <span className={`mt-2 w-1 h-1 rounded-full shrink-0 ${t.accentBg}`} />
                           {b}
                         </li>
                       ))}
                     </ul>
                   </div>
-                  
-                  <div className="text-left md:text-right font-mono2 text-xs text-zinc-500 font-semibold md:pt-1">
-                    [{job.dates}]
-                  </div>
-                </div>
-              </Reveal>
-            );
-          })}
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
@@ -772,11 +854,10 @@ function ExperienceTimeline({ t, dark }) {
 /* Projects                                                             */
 /* ------------------------------------------------------------------ */
 
-function ProjectCard({ t, project, dark, index }) {
+function ProjectCard({ t, dark, project }) {
   const getIcon = () => {
     if (project.categories.includes("AI & GenAI")) return Cpu;
-    if (project.categories.includes("Data Engineering")) return Database;
-    if (project.categories.includes("Cloud & DevOps")) return GitBranch;
+    if (project.categories.includes("Cloud & DevOps")) return Cloud;
     if (project.categories.includes("Full-Stack")) return Layers;
     return Code2;
   };
@@ -789,50 +870,42 @@ function ProjectCard({ t, project, dark, index }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -16 }}
       transition={{ duration: 0.35 }}
-      className={`group rounded-none border ${t.border} ${t.surface} overflow-hidden transition-all duration-300 flex flex-col justify-between hover:bg-zinc-950/20 dark:hover:bg-zinc-950/20 h-full`}
+      className={`group rounded-2xl border overflow-hidden transition-all duration-300 flex flex-col justify-between h-full ${t.surface} ${t.glow}`}
     >
       <div className="p-6 flex-grow">
-        {/* Card Top Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="font-mono2 text-[10px] text-zinc-500 uppercase tracking-widest">
-            [SYS_ID: 0{project.id}]
+        <div className="flex items-center justify-between mb-5">
+          <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${t.border} ${dark ? "bg-indigo-500/10" : "bg-indigo-50"}`}>
+            <Icon className={`w-4 h-4 ${t.accentText}`} strokeWidth={1.75} />
           </div>
-          
-          <div className="flex items-center gap-3">
+
+          <div className="flex items-center gap-2.5">
             {project.flagship && (
-              <span className={`font-mono2 text-[9px] tracking-wide uppercase px-2 py-0.5 rounded-none font-bold bg-lime-400 text-black border border-lime-400`}>
-                FLAGSHIP
+              <span className={`font-body text-[10px] tracking-wide uppercase px-2.5 py-1 rounded-full font-semibold text-white ${t.accentBg}`}>
+                Flagship
               </span>
             )}
             <ExternalLink className={`w-3.5 h-3.5 ${t.mutedSoft} group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300`} />
           </div>
         </div>
 
-        {/* Categories */}
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-1.5 mb-4">
           {project.categories.map((c) => (
             <span
               key={c}
-              className={`font-mono2 text-[9px] tracking-wider uppercase px-2 py-0.5 rounded-none border border-zinc-800 dark:border-zinc-800 text-zinc-400`}
+              className={`font-body text-[10px] uppercase tracking-wide px-2.5 py-1 rounded-full border ${t.border} ${t.mutedSoft}`}
             >
               {c}
             </span>
           ))}
         </div>
 
-        {/* Title */}
-        <h3 className={`font-display font-bold text-xl ${t.text} mb-3 leading-snug group-hover:underline underline-offset-4 ${dark ? 'group-hover:decoration-lime-300' : 'group-hover:decoration-indigo-600'} transition-all`}>
-          {project.title}
-        </h3>
-        
-        {/* Desc */}
+        <h3 className={`font-display text-lg mb-2.5 leading-snug ${t.text}`}>{project.title}</h3>
         <p className={`font-body text-sm ${t.muted} leading-relaxed`}>{project.desc}</p>
       </div>
 
-      {/* Tech tags */}
-      <div className={`px-6 py-4 border-t ${t.border} ${t.surfaceAlt} flex flex-wrap gap-2`}>
+      <div className={`px-6 py-4 border-t ${t.border} flex flex-wrap gap-2`}>
         {project.tech.map((tech) => (
-          <span key={tech} className="font-mono2 text-[10px] tracking-wide text-zinc-500 font-semibold">
+          <span key={tech} className={`font-tag text-[10px] tracking-wide ${t.mutedSoft}`}>
             #{tech}
           </span>
         ))}
@@ -849,62 +922,38 @@ function Projects({ t, dark }) {
     [filter]
   );
 
-  const getColSpan = (index, isFlagship) => {
-    if (isFlagship) return "md:col-span-2 lg:col-span-2";
-    const pattern = ["lg:col-span-1", "lg:col-span-1", "lg:col-span-2", "lg:col-span-1", "lg:col-span-2", "lg:col-span-1"];
-    return pattern[index % pattern.length];
-  };
-
   return (
-    <section id="projects" className={`py-20 sm:py-28 border-b border-zinc-800/80 dark:border-zinc-800/80 ${t.surfaceAlt}`}>
+    <section id="projects" className={`py-20 sm:py-28 ${t.surfaceAlt}`}>
       <div className="max-w-7xl mx-auto px-6">
         <Reveal>
-          <div className="flex items-center gap-2 mb-4 font-mono2 text-[10px] uppercase tracking-widest text-zinc-500">
-            <span>[STAGE 12]</span>
-            <span>&middot;</span>
-            <span>Project Index</span>
-          </div>
-          <h2 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter mb-12 leading-none">
+          <Eyebrow t={t} dark={dark} label="Project index" />
+          <h2 className="font-display text-4xl sm:text-5xl mb-12 leading-[1.05]">
             Shipped,<br />not simulated.
           </h2>
         </Reveal>
-        
-        {/* Command Line Style filter tabs */}
-        <div className="flex flex-wrap gap-3 mb-10 font-mono2 text-xs">
+
+        <div className="flex flex-wrap gap-2.5 mb-10">
           {FILTERS.map((f) => {
             const active = filter === f;
-            const flagMap = {
-              "All": "--all",
-              "Data Engineering": "--data-eng",
-              "Cloud & DevOps": "--cloud-devops",
-              "AI & GenAI": "--ai-genai",
-              "Full-Stack": "--full-stack"
-            };
-            const label = flagMap[f] || `--${f.toLowerCase().replace(/\s+/g, '-')}`;
             return (
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`px-3.5 py-1.5 transition-all rounded-none border ${
-                  active 
-                    ? dark 
-                      ? 'text-lime-300 border-lime-400 bg-lime-950/10 font-bold' 
-                      : 'text-indigo-600 border-indigo-600 bg-indigo-50 font-bold' 
-                    : 'text-zinc-500 hover:text-zinc-300 border-transparent'
+                className={`px-4 py-2 rounded-full font-body text-sm font-medium border transition-all duration-200 ${
+                  active ? t.pillActive : `${t.pill} hover:bg-white/[0.05]`
                 }`}
               >
-                {label}
+                {f}
               </button>
             );
           })}
         </div>
-        
-        {/* Editorial Masonry Grid */}
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <AnimatePresence mode="popLayout">
-            {filtered.map((p, idx) => (
-              <div key={p.id} className={getColSpan(idx, p.flagship)}>
-                <ProjectCard t={t} project={p} dark={dark} index={idx} />
+            {filtered.map((p) => (
+              <div key={p.id}>
+                <ProjectCard t={t} dark={dark} project={p} />
               </div>
             ))}
           </AnimatePresence>
@@ -926,46 +975,38 @@ function Freelance({ t, dark }) {
     "n8n and Python automation across REST API integrations",
   ];
   return (
-    <section id="freelance" className="py-20 sm:py-28 border-b border-zinc-800/80 dark:border-zinc-800/80">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-[0.9fr_1.1fr] gap-12 items-start">
+    <section id="freelance" className="py-20 sm:py-28">
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-[0.9fr_1.1fr] gap-14 items-start">
         <Reveal>
-          <div className="flex items-center gap-2 mb-4 font-mono2 text-[10px] uppercase tracking-widest text-zinc-500">
-            <span>[STAGE 13]</span>
-            <span>&middot;</span>
-            <span>Freelance Registry</span>
-          </div>
-          <h2 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter mb-8 leading-none">
+          <Eyebrow t={t} dark={dark} label="Freelance registry" />
+          <h2 className="font-display text-4xl sm:text-5xl mb-6 leading-[1.05]">
             Top Rated on<br />Upwork.
           </h2>
           <p className={`font-body text-base ${t.muted} mb-8 max-w-sm leading-relaxed`}>
             A 100% Job Success Score, built one delivered pipeline at a time — for law firms,
             lending startups, and AI-first companies.
           </p>
-          
-          <div className="font-mono2 text-xs uppercase tracking-wider space-y-3 pl-4 border-l border-zinc-800">
-            <div className="flex items-center gap-2">
-              <span className="text-zinc-500">[01]</span>
-              <span className={dark ? "text-lime-300" : "text-indigo-600"}>STATUS: TOP_RATED</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-zinc-500">[02]</span>
-              <span>JOB_SUCCESS: 100%</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-zinc-500">[03]</span>
-              <span>MARKET: UPWORK</span>
-            </div>
+
+          <div className="flex flex-col gap-3">
+            {[["Status", "Top Rated"], ["Job Success", "100%"], ["Market", "Upwork"]].map(([k, v]) => (
+              <div key={k} className="flex items-center gap-3">
+                <span className={`font-body text-sm ${t.mutedSoft}`}>{k}</span>
+                <span className={`font-body text-sm font-semibold ${t.accentText}`}>{v}</span>
+              </div>
+            ))}
           </div>
         </Reveal>
-        
+
         <Reveal delay={0.1} className="w-full">
-          <div className={`border ${t.border} p-6 sm:p-8 rounded-none`}>
-            <span className="font-mono2 text-[10px] text-zinc-500 block mb-4">// DELIVERABLES_RECORD</span>
-            <ul className="flex flex-col divide-y divide-zinc-800/40">
-              {items.map((item, idx) => (
-                <li key={item} className="py-3 flex gap-3 items-start">
-                  <span className="font-mono2 text-xs text-zinc-500">0{idx + 1}.</span>
-                  <span className={`font-body text-sm ${t.muted}`}>{item}</span>
+          <div className={`rounded-2xl border p-7 sm:p-9 transition-all duration-300 ${t.surface} ${t.glow}`}>
+            <span className={`font-body text-xs font-semibold uppercase tracking-wide block mb-5 ${t.mutedSoft}`}>
+              Deliverables
+            </span>
+            <ul className="flex flex-col gap-4">
+              {items.map((item) => (
+                <li key={item} className="flex gap-3 items-start">
+                  <CheckCircle2 className={`w-4 h-4 mt-0.5 shrink-0 ${t.accentText}`} strokeWidth={1.75} />
+                  <span className={`font-body text-sm leading-relaxed ${t.muted}`}>{item}</span>
                 </li>
               ))}
             </ul>
@@ -973,13 +1014,9 @@ function Freelance({ t, dark }) {
               href="https://www.upwork.com/"
               target="_blank"
               rel="noreferrer"
-              className={`inline-flex items-center gap-2 mt-8 px-6 py-3.5 rounded-none font-mono2 text-[11px] uppercase tracking-widest transition-all duration-200 border border-current ${
-                dark 
-                  ? 'bg-lime-400 text-black border-lime-400 hover:bg-transparent hover:text-lime-300' 
-                  : 'bg-indigo-600 text-white border-indigo-600 hover:bg-transparent hover:text-indigo-600'
-              }`}
+              className={`inline-flex items-center gap-2 mt-8 px-6 py-3.5 rounded-full font-body text-sm font-semibold text-white ${t.accentBg} transition-all duration-200 shadow-[0_0_30px_-8px_rgba(99,102,241,0.65)] hover:shadow-[0_0_40px_-6px_rgba(99,102,241,0.85)] hover:brightness-110`}
             >
-              Hire Me on Upwork &rarr;
+              Hire Me on Upwork <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
         </Reveal>
@@ -993,44 +1030,43 @@ function Freelance({ t, dark }) {
 /* ------------------------------------------------------------------ */
 
 function Education({ t, dark }) {
+  const rows = [
+    { title: "BS Computer Science", org: "Bahria University, Karachi Campus", tag: "Graduated 2026", icon: GraduationCap },
+    ...CERTS.map((c) => ({ 
+      title: c.name, 
+      org: c.org, 
+      tag: c.tag || "Verified", 
+      cred: c.cred,
+      icon: c.icon || Award 
+    })),
+  ];
   return (
-    <section id="education" className={`py-20 sm:py-28 border-b border-zinc-800/80 dark:border-zinc-800/80 ${t.surfaceAlt}`}>
+    <section id="education" className={`py-20 sm:py-28 ${t.surfaceAlt}`}>
       <div className="max-w-7xl mx-auto px-6">
         <Reveal>
-          <div className="flex items-center gap-2 mb-4 font-mono2 text-[10px] uppercase tracking-widest text-zinc-500">
-            <span>[STAGE 14]</span>
-            <span>&middot;</span>
-            <span>Foundations</span>
-          </div>
-          <h2 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter mb-12 leading-none">
-            Academic & Certs.
+          <Eyebrow t={t} dark={dark} label="Foundations" />
+          <h2 className="font-display text-4xl sm:text-5xl mb-12 leading-[1.05]">
+            Academic & certs.
           </h2>
         </Reveal>
-        
-        <div className={`border-t border-b ${t.border} divide-y ${t.border} mt-10`}>
-          <Reveal>
-            <div className="grid md:grid-cols-[40px_1fr_auto] py-6 font-mono2 text-xs uppercase tracking-wide gap-4">
-              <span className="text-zinc-500 font-bold">01.</span>
-              <div>
-                <h3 className={`font-display font-bold text-base tracking-tight uppercase ${t.text}`}>
-                  BS Computer Science
-                </h3>
-                <p className="text-zinc-400 mt-1 capitalize-none">Bahria University, Karachi Campus</p>
-              </div>
-              <span className="text-zinc-500 font-semibold">[EXPECTED 2026]</span>
-            </div>
-          </Reveal>
-          {CERTS.map((c, i) => (
-            <Reveal key={c.name} delay={0.05 + i * 0.05}>
-              <div className="grid md:grid-cols-[40px_1fr_auto] py-6 font-mono2 text-xs uppercase tracking-wide gap-4">
-                <span className="text-zinc-500 font-bold">0{i + 2}.</span>
+
+        <div className="grid sm:grid-cols-3 gap-5">
+          {rows.map((r, i) => (
+            <Reveal key={r.title} delay={i * 0.05}>
+              <div className={`h-full rounded-2xl border p-6 transition-all duration-300 ${t.surface} ${t.glow} flex flex-col justify-between`}>
                 <div>
-                  <h3 className={`font-display font-bold text-base tracking-tight uppercase ${t.text}`}>
-                    {c.name}
-                  </h3>
-                  <p className="text-zinc-400 mt-1 capitalize-none">{c.org}</p>
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-5 border ${t.border} ${dark ? "bg-indigo-500/10" : "bg-indigo-50"}`}>
+                    <r.icon className={`w-4 h-4 ${t.accentText}`} strokeWidth={1.75} />
+                  </div>
+                  <h3 className={`font-display text-base mb-1.5 ${t.text}`}>{r.title}</h3>
+                  <p className={`font-body text-sm mb-4 ${t.muted}`}>{r.org}</p>
                 </div>
-                <span className="text-zinc-500 font-semibold">[VERIFIED]</span>
+                <div className="flex flex-col gap-1 border-t pt-4 mt-auto border-white/[0.05] dark:border-white/[0.05] border-slate-200">
+                  <span className={`font-body text-xs font-semibold ${t.accentText}`}>{r.tag}</span>
+                  {r.cred && (
+                    <span className={`font-tag text-[10px] ${t.mutedSoft}`}>ID: {r.cred}</span>
+                  )}
+                </div>
               </div>
             </Reveal>
           ))}
@@ -1041,82 +1077,99 @@ function Education({ t, dark }) {
 }
 
 /* ------------------------------------------------------------------ */
+/* CTA banner — new, Miraal-style closing panel                        */
+/* ------------------------------------------------------------------ */
+
+function CTABanner({ t, dark }) {
+  return (
+    <section className="py-20 sm:py-24">
+      <div className="max-w-7xl mx-auto px-6">
+        <Reveal>
+          <div
+            className={`relative overflow-hidden rounded-3xl border p-10 sm:p-16 text-center ${t.surface}`}
+          >
+            <div
+              className={`absolute -top-24 left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full blur-3xl opacity-50 ${
+                dark ? "bg-indigo-600/25" : "bg-indigo-300/40"
+              }`}
+            />
+            <div className="relative z-10">
+              <Eyebrow t={t} dark={dark} label="Open to new work" />
+              <h2 className="font-display text-3xl sm:text-5xl mb-5 leading-[1.05]">
+                Ready to build<br />something reliable?
+              </h2>
+              <p className={`font-body text-base ${t.muted} max-w-xl mx-auto mb-9 leading-relaxed`}>
+                Whether it's a fintech data platform or an AI automation pipeline —
+                I'll help you ship it without the multi-day manual detour.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href="#contact"
+                  className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-body text-sm font-semibold text-white ${t.accentBg} transition-all duration-200 shadow-[0_0_30px_-8px_rgba(99,102,241,0.65)] hover:shadow-[0_0_40px_-6px_rgba(99,102,241,0.85)] hover:brightness-110`}
+                >
+                  Get in touch <ArrowUpRight className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://www.upwork.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-full border ${t.border} font-body text-sm font-semibold ${t.text} hover:bg-white/[0.05] transition-all duration-200`}
+                >
+                  View Upwork Profile
+                </a>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* Contact                                                              */
 /* ------------------------------------------------------------------ */
 
 function Contact({ t, dark }) {
+  const groups = [
+    { label: "Email", value: "ranashahmeerali@gmail.com", href: "mailto:ranashahmeerali@gmail.com" },
+    { label: "Phone", value: "0309-0905305", href: "tel:03090905305" },
+    { label: "LinkedIn", value: "View profile", href: "https://linkedin.com/in/rana-shahmeer-ali-479592263" },
+    { label: "GitHub", value: "View profile", href: "https://github.com/Ranashahmeer" },
+  ];
   return (
-    <section id="contact" className="py-24 sm:py-32">
+    <section id="contact" className="py-20 sm:py-28">
       <div className="max-w-7xl mx-auto px-6">
         <Reveal>
-          <div className="flex items-center gap-2 mb-4 font-mono2 text-[10px] uppercase tracking-widest text-zinc-500">
-            <span>[STAGE 15]</span>
-            <span>&middot;</span>
-            <span>Contact Directory</span>
-          </div>
-        </Reveal>
-        
-        <Reveal delay={0.05}>
-          <h2 className="font-display font-black text-5xl sm:text-7xl lg:text-8xl leading-none uppercase tracking-tighter mb-16">
+          <Eyebrow t={t} dark={dark} label="Contact directory" />
+          <h2 className="font-display text-4xl sm:text-6xl mb-14 leading-[1.05]">
             Let&apos;s build<br />something reliable.
           </h2>
         </Reveal>
-        
-        <Reveal delay={0.15}>
-          <div className={`border-t ${t.border} pt-12 grid sm:grid-cols-2 md:grid-cols-4 gap-8 text-left font-mono2 text-[11px] uppercase tracking-wider`}>
-            <div>
-              <span className="text-zinc-500 block mb-2">// EMAIL_ROUTING</span>
-              <a 
-                href="mailto:ranashahmeerali@gmail.com" 
-                className={`font-bold hover:underline transition-colors ${dark ? 'hover:text-lime-300 text-zinc-200' : 'hover:text-indigo-600 text-zinc-800'}`}
+
+        <Reveal delay={0.1}>
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5">
+            {groups.map((g) => (
+              <a
+                key={g.label}
+                href={g.href}
+                target={g.href.startsWith("http") ? "_blank" : undefined}
+                rel={g.href.startsWith("http") ? "noreferrer" : undefined}
+                className={`group rounded-2xl border p-6 transition-all duration-300 ${t.surface} ${t.glow}`}
               >
-                ranashahmeerali@gmail.com
-              </a>
-            </div>
-            
-            <div>
-              <span className="text-zinc-500 block mb-2">// MOBILE_TELEPHONY</span>
-              <a 
-                href="tel:03090905305" 
-                className={`font-bold hover:underline transition-colors ${dark ? 'hover:text-lime-300 text-zinc-200' : 'hover:text-indigo-600 text-zinc-800'}`}
-              >
-                0309-0905305
-              </a>
-            </div>
-            
-            <div>
-              <span className="text-zinc-500 block mb-2">// SOCIALS</span>
-              <div className="flex flex-col gap-1.5 font-bold">
-                <a 
-                  href="https://linkedin.com/in/rana-shahmeer-ali-479592263" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className={`hover:underline transition-colors ${dark ? 'hover:text-lime-300 text-zinc-200' : 'hover:text-indigo-600 text-zinc-800'}`}
+                <span className={`font-body text-xs font-semibold uppercase tracking-wide block mb-3 ${t.mutedSoft}`}>
+                  {g.label}
+                </span>
+                <span
+                  className={`font-body text-sm font-semibold flex items-center gap-1.5 ${t.text} transition-colors ${
+                    dark ? "group-hover:text-indigo-400" : "group-hover:text-indigo-600"
+                  }`}
                 >
-                  LINKEDIN &rarr;
-                </a>
-                <a 
-                  href="https://github.com/Ranashahmeer" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className={`hover:underline transition-colors ${dark ? 'hover:text-lime-300 text-zinc-200' : 'hover:text-indigo-600 text-zinc-800'}`}
-                >
-                  GITHUB &rarr;
-                </a>
-              </div>
-            </div>
-            
-            <div>
-              <span className="text-zinc-500 block mb-2">// PLATFORMS</span>
-              <a 
-                href="https://www.upwork.com/" 
-                target="_blank" 
-                rel="noreferrer" 
-                className={`font-bold hover:underline transition-colors ${dark ? 'hover:text-lime-300 text-zinc-200' : 'hover:text-indigo-600 text-zinc-800'}`}
-              >
-                UPWORK PROFILE &rarr;
+                  {g.value}
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </span>
               </a>
-            </div>
+            ))}
           </div>
         </Reveal>
       </div>
@@ -1132,11 +1185,11 @@ function Footer({ t }) {
   return (
     <footer className={`border-t ${t.border} py-8`}>
       <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <span className="font-mono2 text-[10px] text-zinc-500 uppercase tracking-widest">
+        <span className={`font-body text-xs ${t.mutedSoft}`}>
           &copy; {new Date().getFullYear()} Rana Shahmeer Ali &middot; All Rights Reserved.
         </span>
-        <span className="font-mono2 text-[10px] text-zinc-500 uppercase tracking-widest">
-          [STACK: REACT + TAILWIND + FRAMER]
+        <span className={`font-body text-xs ${t.mutedSoft}`}>
+          Built with React, Tailwind &amp; Framer Motion
         </span>
       </div>
     </footer>
@@ -1152,16 +1205,18 @@ export default function App() {
   const t = getTheme(dark);
 
   return (
-    <div className={`min-h-screen ${t.page} ${t.text} transition-colors duration-300 relative overflow-hidden bg-[linear-gradient(to_right,#80808007_1px,transparent_1px),linear-gradient(to_bottom,#80808007_1px,transparent_1px)] bg-[size:32px_32px]`}>
+    <div className={`min-h-screen ${t.page} ${t.text} transition-colors duration-300 relative overflow-hidden`}>
       <FontImport />
       <Nav t={t} dark={dark} setDark={setDark} />
       <Hero t={t} dark={dark} />
+      <FeatureGrid t={t} dark={dark} />
       <About t={t} dark={dark} />
       <Skills t={t} dark={dark} />
       <ExperienceTimeline t={t} dark={dark} />
       <Projects t={t} dark={dark} />
       <Freelance t={t} dark={dark} />
       <Education t={t} dark={dark} />
+      <CTABanner t={t} dark={dark} />
       <Contact t={t} dark={dark} />
       <Footer t={t} />
     </div>
