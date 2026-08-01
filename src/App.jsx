@@ -224,6 +224,7 @@ const PROJECTS = [
     categories: ["Cloud & DevOps"],
     desc: "AWS Lambda + EventBridge + S3 + Snowpipe, fully serverless ingestion into Snowflake.",
     tech: ["AWS Lambda", "EventBridge", "S3", "Snowpipe"],
+    github: "https://github.com/Ranashahmeer/Serverless-Currency-Exchange-Rate-Pipeline",
   },
   {
     id: 5,
@@ -280,6 +281,7 @@ const PROJECTS = [
     categories: ["Full-Stack"],
     desc: "Multi-vendor futsal booking SaaS platform: Angular 17, .NET 8 Web API, SQL Server, JWT authentication.",
     tech: ["Angular 17", ".NET 8", "SQL Server", "JWT"],
+    github: "https://github.com/Ranashahmeer/Play-Ease",
   },
   {
     id: 13,
@@ -300,6 +302,12 @@ const PROJECTS = [
 const AnthropicIcon = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className={props.className}>
     <path d="M12 2L2 22h4l3-7h6l3 7h4L12 2zM10 12l2-5 2 5h-4z" />
+  </svg>
+);
+
+const UpworkIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={props.className}>
+    <path d="M18.56 1H15v10.94c0 1.25-.86 2.06-1.92 2.06s-1.85-.81-1.85-2.06V1H7.66v10.94C7.66 15.35 10.1 18 13.08 18c1.86 0 3.32-.97 4.14-2.5l1.17 6.4h3.6l-2.06-11.3V1zM5.58 8.08C3.12 8.08 1.1 9.94 1.1 12.5s2.02 4.42 4.48 4.42 4.48-1.86 4.48-4.42-2.02-4.42-4.48-4.42zm0 6.06c-1.12 0-1.92-.85-1.92-1.64 0-.79.8-1.64 1.92-1.64s1.92.85 1.92 1.64c0 .79-.8 1.64-1.92 1.64z"/>
   </svg>
 );
 
@@ -878,13 +886,37 @@ function ProjectCard({ t, dark, project }) {
             <Icon className={`w-4 h-4 ${t.accentText}`} strokeWidth={1.75} />
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             {project.flagship && (
               <span className={`font-body text-[10px] tracking-wide uppercase px-2.5 py-1 rounded-full font-semibold text-white ${t.accentBg}`}>
                 Flagship
               </span>
             )}
-            <ExternalLink className={`w-3.5 h-3.5 ${t.mutedSoft} group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300`} />
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noreferrer"
+                className={`p-1.5 rounded-full border ${t.border} ${t.mutedSoft} hover:${dark ? 'text-indigo-400 border-indigo-500/30 bg-indigo-500/5' : 'text-indigo-600 border-indigo-500/20 bg-indigo-50'} transition-all`}
+                title="View GitHub Repository"
+              >
+                <Github className="w-3.5 h-3.5" />
+              </a>
+            )}
+            {project.upwork && (
+              <a
+                href={project.upwork}
+                target="_blank"
+                rel="noreferrer"
+                className={`p-1.5 rounded-full border ${t.border} ${t.mutedSoft} hover:${dark ? 'text-indigo-400 border-indigo-500/30 bg-indigo-500/5' : 'text-indigo-600 border-indigo-500/20 bg-indigo-50'} transition-all`}
+                title="View Upwork Details"
+              >
+                <UpworkIcon className="w-3.5 h-3.5" />
+              </a>
+            )}
+            {(!project.github && !project.upwork) && (
+              <ExternalLink className={`w-3.5 h-3.5 ${t.mutedSoft} group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300`} />
+            )}
           </div>
         </div>
 
